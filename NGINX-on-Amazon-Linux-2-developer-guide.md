@@ -62,7 +62,9 @@ Nginxプロセスの自動起動設定
 
 無効(disabled)になっているため、有効にします
 
-``` $ sudo systemctl enable nginx.service ```
+```
+$ sudo systemctl enable nginx.service
+```
 
 応答
 
