@@ -31,6 +31,11 @@ NGINX インストール
 sudo amazon-linux-extras install nginx1
 ``` 
 
+応答、表示されたパッケージリストに nginx1 が enabled になったことを確認する
+```
+38  nginx1=latest            enabled      [ =stable ]
+```
+
 NGINX 起動
 ```
 sudo systemctl start nginx.service
