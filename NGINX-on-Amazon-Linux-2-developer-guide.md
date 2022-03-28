@@ -7,8 +7,7 @@
 
 > **NGINX インストールの参考にしたWebSite** <br>
 Amazon Linux 2にExtrasレポジトリからNginxをインストールする<br>
-https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/
-<br>
+https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/<br>
 Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
 https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library
 
