@@ -21,45 +21,53 @@
 >NGINX インストールの参考にしたWebSite<br>
 https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/
 
-
-パッケージ一覧
-
+## NGINX インストール
++ パッケージ一覧を表示する
 ```
 amazon-linux-extras
 ```
 
-NGINX インストール
+応答：表示されたパッケージリストに nginx1 があることを確認する
+```
+38  nginx1                   available    [ =stable ]
+```
 
+NGINX インストール
 ```
 sudo amazon-linux-extras install nginx1
 ``` 
 
-
 NGINX 起動
-
-``` $ sudo systemctl start nginx.service ```
-
+```
+sudo systemctl start nginx.service
+```
 
 NGINX 状態
 
-``` $ sudo systemctl status nginx.service ```
+```
+sudo systemctl status nginx.service
+```
 
 
-インスタンスのIPアドレスへブラウザでアクセスし NGINX HTTP サーバーが動いているのを確認する。
+インスタンスのパブリックIPアドレスへブラウザでアクセスし NGINX HTTP サーバーが動いているのを確認する。
 
-接続先ドメインの例
+画像を挿入する
 
-camellia.pgflow.click
 
-NGINX プロセスの自動起動設定
+
+## NGINX プロセスの自動起動設定
 
 自動起動設定を確認します
 
-``` $ systemctl is-enabled nginx.service ```
+```
+systemctl is-enabled nginx.service
+```
 
 応答
 
-``` disabled ```
+```
+disabled
+```
 
 無効(disabled)になっているため、有効にします
 
@@ -78,11 +86,11 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service t
 $ systemctl is-enabled nginx.service
 
 応答
-
+```
 enabled
+```
 
 有効になりました
-
 
 ## NGINX サービスコマンドリスト
 
