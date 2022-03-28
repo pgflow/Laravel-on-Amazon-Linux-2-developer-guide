@@ -1,6 +1,3 @@
-.md
-
-
 # NGINX-on-Amazon-Linux-2-developer-guide<a name="NGINX-on-Amazon-Linux-2-developer-guide"></a>
 
 作成日：2022/03/28<br>
@@ -100,3 +97,6 @@ $ sudo systemctl stop nginx
 nginx サービス再起動コマンド
 
 $ sudo systemctl restart nginx
+
+***
++ [TOP](Laravel-on-Amazon-Linux-2-developer-guide.md)
