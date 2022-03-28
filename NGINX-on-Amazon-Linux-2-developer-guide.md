@@ -16,7 +16,7 @@ https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basic
 
 amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
 
-+ パッケージ一覧を表示する
+パッケージ一覧を表示する
 ```
 amazon-linux-extras
 ```
@@ -103,7 +103,6 @@ enabled
 ## NGINX サービスコマンドリスト
 
 + NGINX サービス状態コマンド
-
 ```
 sudo systemctl status nginx.service
 ```
