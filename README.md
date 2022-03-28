@@ -13,7 +13,7 @@
 
 
 ## 目次
-+ [NGINX](NGINX-on-Amazon-Linux-2-developer-guide)
++ [NGINX](NGINX-on-Amazon-Linux-2-developer-guide.md)
 + PHP
 + Composer
 + MariaDB
