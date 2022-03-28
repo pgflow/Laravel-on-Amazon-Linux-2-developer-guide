@@ -57,10 +57,9 @@ sudo systemctl status nginx.service
 
 インスタンスのパブリックIPアドレスへブラウザでアクセスし NGINX HTTP サーバーが動いているのを確認する。
 
+ブラウザに以下のページが表示されたらOK
 
-
-画像を挿入する
-
+![Welcome to nginx on Amazon Linux!](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome-to-nginx-on-Amazon-Linux.png)
 
 
 ## NGINX プロセスの自動起動設定
