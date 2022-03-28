@@ -4,24 +4,13 @@
 
 このドキュメントは、Amazon Linux 2 に NGINX 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
-* amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
-
-
-
-```
-    function test() {
-        let a = 0;
-        }
-
-    test
-        test
-```
-
-
 >NGINX インストールの参考にしたWebSite<br>
 https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/
 
 ## NGINX インストール
+
+amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
+
 + パッケージ一覧を表示する
 ```
 amazon-linux-extras
@@ -82,8 +71,9 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service t
 ```
 
 自動起動設定を確認します
-
-$ systemctl is-enabled nginx.service
+```
+systemctl is-enabled nginx.service
+```
 
 応答
 ```
