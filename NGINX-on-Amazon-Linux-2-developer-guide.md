@@ -47,6 +47,21 @@ NGINX 状態
 sudo systemctl status nginx.service
 ```
 
+応答、Active: active (running) になったことを確認する
+```
+[ec2-user@ip-172-26-0-23 ~]$ sudo systemctl status nginx.service
+● nginx.service - The nginx HTTP and reverse proxy server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; vendor preset: disabled)
+   Active: active (running) since Mon 2022-03-28 07:30:55 UTC; 4s ago
+  Process: 11593 ExecStart=/usr/sbin/nginx (code=exited, status=0/SUCCESS)
+  Process: 11589 ExecStartPre=/usr/sbin/nginx -t (code=exited, status=0/SUCCESS)
+  Process: 11588 ExecStartPre=/usr/bin/rm -f /run/nginx.pid (code=exited, status=0/SUCCESS)
+ Main PID: 11595 (nginx)
+   CGroup: /system.slice/nginx.service
+           ├─11595 nginx: master process /usr/sbin/nginx
+           └─11596 nginx: worker process
+```
+
 
 ##  NGINX HTTP へブラウザでアクセス出来るか確認する
 
