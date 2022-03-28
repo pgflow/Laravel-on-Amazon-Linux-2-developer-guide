@@ -66,7 +66,9 @@ Nginxプロセスの自動起動設定
 
 応答
 
-``` Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service. ```
+```
+Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service. 
+```
 
 自動起動設定を確認します
 
