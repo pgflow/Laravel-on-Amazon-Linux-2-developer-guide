@@ -18,36 +18,40 @@
 ```
 
 
->nginx インストールの参考にしたWebSite<br>
+>NGINX インストールの参考にしたWebSite<br>
 https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/
 
 
 パッケージ一覧
 
-``` $ amazon-linux-extras ```
+```
+amazon-linux-extras
+```
 
-nginx インストール
+NGINX インストール
 
-``` $ sudo amazon-linux-extras install nginx1 ``` 
+```
+sudo amazon-linux-extras install nginx1
+``` 
 
 
-nginx 起動
+NGINX 起動
 
 ``` $ sudo systemctl start nginx.service ```
 
 
-nginx 状態
+NGINX 状態
 
 ``` $ sudo systemctl status nginx.service ```
 
 
-インスタンスのIPアドレスへブラウザでアクセスし nginx HTTP サーバーが動いているのを確認する。
+インスタンスのIPアドレスへブラウザでアクセスし NGINX HTTP サーバーが動いているのを確認する。
 
 接続先ドメインの例
 
 camellia.pgflow.click
 
-Nginxプロセスの自動起動設定
+NGINX プロセスの自動起動設定
 
 自動起動設定を確認します
 
@@ -80,23 +84,31 @@ enabled
 有効になりました
 
 
-nginx サービスコマンド
+## NGINX サービスコマンドリスト
 
-nginx サービス状態コマンド
++ NGINX サービス状態コマンド
 
-$ sudo systemctl status nginx.service
+```
+sudo systemctl status nginx.service
+```
 
-nginx サービス起動コマンド
++ NGINX サービス起動コマンド
 
-$ sudo systemctl start nginx
+```
+sudo systemctl start nginx
+```
 
-nginx サービス停止コマンド
++ NGINX サービス停止コマンド
 
-$ sudo systemctl stop nginx
+```
+sudo systemctl stop nginx
+```
 
-nginx サービス再起動コマンド
++ NGINX サービス再起動コマンド
 
-$ sudo systemctl restart nginx
+```
+sudo systemctl restart nginx
+```
 
 ***
 + [TOP - README](README.md)
