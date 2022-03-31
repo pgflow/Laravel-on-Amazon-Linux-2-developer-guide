@@ -1,6 +1,6 @@
 # Laravel-on-Amazon-Linux-2-developer-guide<a name="Laravel-on-Amazon-Linux-2-developer-guide"></a>
 
-作成日：2022/03/29+<br>
+作成日：2022/03/31<br>
 
 このドキュメントは、Amazon Linux 2 に Laravel 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
@@ -13,7 +13,8 @@
 
 
 ## 目次
-+ [NGINX](NGINX-on-Amazon-Linux-2-developer-guide.md)
-+ [PHP](PHP-on-Amazon-Linux-2-developer-guide.md)
-+ [Composer](Composer-on-Amazon-Linux-2-developer-guide.md)
-+ [MariaDB](MariaDB-on-Amazon-Linux-2-developer-guide.md)
++ [NGINX](NGINX-on-Amazon-Linux-2-install-guide.md)
++ [PHP](PHP-on-Amazon-Linux-2-install-guide.md)
++ [Composer](Composer-on-Amazon-Linux-2-install-guide.md)
++ [MariaDB](MariaDB-on-Amazon-Linux-2-install-guide.md)
++ [Git](Git-on-Amazon-Linux-2-install-guide.md)
