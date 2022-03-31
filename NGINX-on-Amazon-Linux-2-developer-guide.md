@@ -4,11 +4,13 @@
 
 このドキュメントは、Amazon Linux 2 に NGINX 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
-+ [NGINX インストール](#install_nginx1)
-+
-+
++ [NGINX インストール](#install_nginx)
++ [NGINX HTTP へブラウザでアクセス出来るか確認する](#welcome_nginx)
++ [NGINX プロセスの自動起動設定](#enabled_nginx_service)
++ [NGINX サービスコマンドリスト](#status_nginx_service)
++ [NGINX インストールの参考にしたWebSite](#reference_website_nginx)
 
-## <a name="install_nginx1"></a>NGINX インストール
+## <a name="install_nginx"></a>NGINX インストール
 
 amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
 
@@ -49,7 +51,8 @@ sudo systemctl status nginx.service
 ```
 
 
-##  NGINX HTTP へブラウザでアクセス出来るか確認する
+## <a name="welcome_nginx"></a>NGINX HTTP へブラウザでアクセス出来るか確認する
+
 
 インスタンスのパブリックIPアドレスへブラウザでアクセスし NGINX HTTP サーバーが動いているのを確認する。
 
@@ -58,7 +61,7 @@ sudo systemctl status nginx.service
 ![Welcome to nginx on Amazon Linux!](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome-to-nginx-on-Amazon-Linux.png)
 
 
-## NGINX プロセスの自動起動設定
+## <a name="enabled_nginx_service"></a>NGINX プロセスの自動起動設定
 
 自動起動設定を確認します
 
@@ -96,7 +99,7 @@ enabled
 
 有効になりました
 
-## NGINX サービスコマンドリスト
+## <a name="status_nginx_service"></a>NGINX サービスコマンドリスト
 
 + NGINX サービス状態コマンド
 ```
@@ -136,7 +139,7 @@ sudo systemctl reload nginx
 + [TOP - README](README.md)
 
 ***
-> **NGINX インストールの参考にしたWebSite** <br>
+> <a name="reference_website_nginx"></a> **NGINX インストールの参考にしたWebSite** <br>
 Amazon Linux 2にExtrasレポジトリからNginxをインストールする<br>
 https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/<br>
 Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
