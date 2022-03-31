@@ -125,7 +125,6 @@ enabled
 有効になりました
 
 ## <a name="status_nginx_service"></a>NGINX サービスコマンドリスト
-よく使う NGINX コマンド
 
 + NGINX サービス状態コマンド
 ```
