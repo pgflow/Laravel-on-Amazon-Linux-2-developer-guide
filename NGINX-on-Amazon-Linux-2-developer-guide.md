@@ -4,14 +4,6 @@
 
 このドキュメントは、Amazon Linux 2 に NGINX 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
-
-> **NGINX インストールの参考にしたWebSite** <br>
-Amazon Linux 2にExtrasレポジトリからNginxをインストールする<br>
-https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/<br>
-Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
-https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library
-
-
 ## NGINX インストール
 
 amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
@@ -138,3 +130,11 @@ sudo systemctl reload nginx
 
 ***
 + [TOP - README](README.md)
+
+***
+> **NGINX インストールの参考にしたWebSite** <br>
+Amazon Linux 2にExtrasレポジトリからNginxをインストールする<br>
+https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/<br>
+Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
+https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library
+
