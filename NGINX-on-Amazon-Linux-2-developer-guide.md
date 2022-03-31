@@ -1,4 +1,4 @@
-# NGINX-on-Amazon-Linux-2-developer-guide<a name="NGINX-on-Amazon-Linux-2-developer-guide"></a>
+# <a name="pageTop"></a>NGINX-on-Amazon-Linux-2-developer-guide
 
 作成日：2022/03/28<br>
 
@@ -136,8 +136,8 @@ sudo systemctl reload nginx
 ```
 
 ***
-+ [TOP - README](README.md)
-
++ [pageTop](#pageTop)
++ [README](README.md)
 ***
 > <a name="reference_website_nginx"></a> **NGINX インストールの参考にしたWebSite** <br>
 Amazon Linux 2にExtrasレポジトリからNginxをインストールする<br>
