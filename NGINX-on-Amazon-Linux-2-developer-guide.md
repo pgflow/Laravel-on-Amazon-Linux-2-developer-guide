@@ -1,4 +1,4 @@
-# <a name="pageTop"></a>NGINX-on-Amazon-Linux-2-developer-guide
+# <a name="pageTop"></a>NGINX on Amazon Linux 2 developer guide
 
 作成日：2022/03/28<br>
 
@@ -11,6 +11,16 @@
 + [NGINX インストールの参考にしたWebSite](#reference_website_nginx)
 
 ## <a name="install_nginx"></a>NGINX インストール
+
+インストールされているNGINXのバージョンを確認する
+```
+nginx -v
+```
+
+応答、nginxは存在していない
+```
+-bash: nginx: command not found
+```
 
 amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
 
@@ -32,6 +42,16 @@ sudo amazon-linux-extras install nginx1
 応答、表示されたパッケージリストに nginx1 が enabled になったことを確認する
 ```
 38  nginx1=latest            enabled      [ =stable ]
+```
+
+インストールされているNGINXのバージョンを確認する
+```
+nginx -v
+```
+
+応答、nginx 1.20.0 がインストールされた
+```
+nginx version: nginx/1.20.0
 ```
 
 NGINX 起動
@@ -62,6 +82,7 @@ sudo systemctl status nginx.service
 
 
 ## <a name="enabled_nginx_service"></a>NGINX プロセスの自動起動設定
+Linux Server を再起動した際に、NGINX も起動するように設定をする。
 
 自動起動設定を確認します
 
@@ -100,6 +121,7 @@ enabled
 有効になりました
 
 ## <a name="status_nginx_service"></a>NGINX サービスコマンドリスト
+よく使う NGINX コマンド
 
 + NGINX サービス状態コマンド
 ```
@@ -143,5 +165,6 @@ sudo systemctl reload nginx
 Amazon Linux 2にExtrasレポジトリからNginxをインストールする<br>
 https://dev.classmethod.jp/articles/install-nginx-on-amazon-linux2-from-extras-repository/<br>
 Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
-https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library
-
+https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library<br>
+nginx documentation<br>
+https://nginx.org/en/docs/
