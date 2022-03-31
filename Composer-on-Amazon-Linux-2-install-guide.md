@@ -1,4 +1,4 @@
-# <a name="pageTop"></a>Composer on Amazon Linux-2 install guide
+# <a name="pageTop"></a>Composer on Amazon Linux 2 install guide
 
 作成日：2022/03/31<br>
 
