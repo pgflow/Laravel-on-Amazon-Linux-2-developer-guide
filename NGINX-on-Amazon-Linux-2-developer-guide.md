@@ -4,13 +4,11 @@
 
 このドキュメントは、Amazon Linux 2 に NGINX 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
-+ [NGINX インストール](#jump-there)
++ [NGINX インストール](#NGINX インストール)
 +
 +
 
-
-<a name="jump-there"></a>
-## NGINX インストール<a name="NGINX インストール"></a>
+## <a name="NGINX インストール"></a>NGINX インストール
 
 amazon-linux-extras というパッケージ管理システムから NGINX をインストールします。
 
