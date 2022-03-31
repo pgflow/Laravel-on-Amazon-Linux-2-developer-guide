@@ -15,12 +15,12 @@
 
 ## <a name="install_php"></a>PHP8.0 インストール
 
-インストールされているPHPのバージョンを確認する
+インストールされている PHP のバージョンを確認する
 ```
 php -v
 ```
 
-応答、phpは存在していない
+応答、php は存在していない
 ```
 -bash: php: command not found
 ```
