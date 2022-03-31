@@ -67,7 +67,11 @@ sudo systemctl status nginx.service
 
 応答、Active: active (running) になったことを確認する
 ```
-   Active: active (running) since Mon 2022-03-28 07:30:55 UTC; 4s ago
+● nginx.service - The nginx HTTP and reverse proxy server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+  Drop-In: /usr/lib/systemd/system/nginx.service.d
+           └─php-fpm.conf
+   Active: active (running) since Thu 2022-03-31 04:30:21 UTC; 3min 55s ago
 ```
 
 
