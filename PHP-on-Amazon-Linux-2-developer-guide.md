@@ -1,16 +1,21 @@
-# PHP-on-Amazon-Linux-2-developer-guide<a name="PHP-on-Amazon-Linux-2-developer-guide"></a>
+# <a name="pageTop"></a>PHP 8.0 on Amazon Linux 2 developer guide<a name="PHP-on-Amazon-Linux-2-developer-guide"></a>
 
 作成日：2022/03/28<br>
 
 このドキュメントは、Amazon Linux 2 に PHP 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
++ [NGINX インストール](#install_nginx)
++ [NGINX HTTP へブラウザでアクセス出来るか確認する](#welcome_nginx)
++ [NGINX プロセスの自動起動設定](#enabled_nginx_service)
++ [NGINX サービスコマンドリスト](#status_nginx_service)
++ [NGINX インストールの参考にしたWebSite](#reference_website_nginx)
 
 > **PHP インストールの参考にしたWebSite** <br>
 Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
 https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library
 
 
-## PHP インストール
+## <a name="install_php8.0">PHP 8.0 インストール
 
 インストールされているPHPのバージョンを確認する
 ```
