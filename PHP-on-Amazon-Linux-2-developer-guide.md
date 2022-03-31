@@ -1,21 +1,15 @@
-# <a name="pageTop"></a>PHP 8.0 on Amazon Linux 2 developer guide<a name="PHP-on-Amazon-Linux-2-developer-guide"></a>
+# <a name="pageTop"></a>PHP8.0 on Amazon Linux 2 developer guide
 
-作成日：2022/03/28<br>
+作成日：2022/03/31<br>
 
-このドキュメントは、Amazon Linux 2 に PHP 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
+このドキュメントは、Amazon Linux 2 に PHP8.0 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
-+ [NGINX インストール](#install_nginx)
-+ [NGINX HTTP へブラウザでアクセス出来るか確認する](#welcome_nginx)
-+ [NGINX プロセスの自動起動設定](#enabled_nginx_service)
-+ [NGINX サービスコマンドリスト](#status_nginx_service)
-+ [NGINX インストールの参考にしたWebSite](#reference_website_nginx)
++ [PHP8.0 インストール](#install_php)
++ [ブラウザでアクセスし PHP が動作出来るか確認する](#welcome_php)
++ [php-fpm サービスコマンドリスト](#status_php-fpm_service)
++ [PHP8.0 インストールの参考にした WebSite](#reference_website_php)
 
-> **PHP インストールの参考にしたWebSite** <br>
-Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
-https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library
-
-
-## <a name="install_php8.0">PHP 8.0 インストール
+## <a name="install_php"></a>PHP8.0 インストール
 
 インストールされているPHPのバージョンを確認する
 ```
@@ -39,116 +33,140 @@ amazon-linux-extras
 51  php8.0                   available    [ =stable ]
 ```
 
-NGINX インストール
+php8.0 インストール
 ```
-sudo amazon-linux-extras install nginx1
+sudo amazon-linux-extras install php8.0
 ``` 
 
-応答、表示されたパッケージリストに nginx1 が enabled になったことを確認する
-```
-38  nginx1=latest            enabled      [ =stable ]
-```
-
-NGINX 起動
-```
-sudo systemctl start nginx.service
-```
-
-NGINX 状態
+応答、php-cli, php-fpm, php-mysqlnd, php-pdo, の　4 Packages が同時にインストールされます。
+y と入力して Enter でインストールを進めます
 
 ```
-sudo systemctl status nginx.service
+======================================================================================================
+ Package               Arch             Version                     Repository                   Size
+======================================================================================================
+Installing:
+ php-cli               x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           5.0 M
+ php-fpm               x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           1.7 M
+ php-mysqlnd           x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           189 k
+ php-pdo               x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           122 k
+Installing for dependencies:
+ libzip                x86_64           1.3.2-1.amzn2.0.1           amzn2-core                   62 k
+ php-common            x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           1.2 M
+
+Transaction Summary
+======================================================================================================
+Install  4 Packages (+2 Dependent packages)
+
+Total download size: 8.3 M
+Installed size: 41 M
+Is this ok [y/d/N]: y
+```
+
+応答、表示されたパッケージリストに php8.0 が enabled になったことを確認する
+```
+51  php8.0=latest            enabled      [ =stable ]
+```
+
+インストールされているPHPのバージョンを確認する
+```
+php -v
+```
+
+応答、PHP 8.0.16 がインストールされた
+```
+PHP 8.0.16 (cli) (built: Mar  1 2022 00:31:45) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v4.0.16, Copyright (c) Zend Technologies
+```
+
+php-fpm を起動します。
+```
+sudo systemctl start php-fpm
+```
+
+NGINX を再起動してインストールした php-fpm を適用します。
+```
+# sudo systemctl restart nginx
+```
+
+php-fpm 状態
+
+```
+sudo systemctl status php-fpm.service
 ```
 
 応答、Active: active (running) になったことを確認する
 ```
-   Active: active (running) since Mon 2022-03-28 07:30:55 UTC; 4s ago
+● php-fpm.service - The PHP FastCGI Process Manager
+   Loaded: loaded (/usr/lib/systemd/system/php-fpm.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2022-03-31 04:29:20 UTC; 4min 22s ago
 ```
 
+##  <a name="welcome_php"></a>ブラウザでアクセスし PHP が動作出来るか確認する
 
-##  NGINX HTTP へブラウザでアクセス出来るか確認する
+phpversion() 関数でPHPバージョンを確認するphp実行ファイルを作成し、
+NGINX HTTP Server のデフォルトディレクトリへ移動します。
 
-インスタンスのパブリックIPアドレスへブラウザでアクセスし NGINX HTTP サーバーが動いているのを確認する。
+```
+echo "<?php echo 'phpversion:'.phpversion(); ?>" > testphp.php
+sudo mv testphp.php /usr/share/nginx/html/testphp.php
+```
+
+インスタンスのパブリックIPアドレスに testphp.php を付けてブラウザでアクセスし PHPのバージョンを確認する
 
 ブラウザに以下のページが表示されたらOK
 
-![Welcome to nginx on Amazon Linux!](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome-to-nginx-on-Amazon-Linux.png)
+![phpversion:8.0.16](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/phptest.png)
 
+## <a name="status_php-fpm_service"></a>php-fpm サービスコマンドリスト
 
-## NGINX プロセスの自動起動設定
+php-fpm サービスのコマンド
 
-自動起動設定を確認します
-
++ php-fpm サービス状態コマンド
 ```
-systemctl is-enabled nginx.service
-```
-
-応答
-
-```
-disabled
+sudo systemctl status php-fpm.service
 ```
 
-無効(disabled)になっているため、有効にします
-
++ php-fpm サービス起動コマンド
 ```
-sudo systemctl enable nginx.service
-```
-
-応答
-
-```
-Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service. 
+sudo systemctl start php-fpm
 ```
 
-自動起動設定を確認します
++ php-fpm サービス停止コマンド
 ```
-systemctl is-enabled nginx.service
-```
-
-応答
-```
-enabled
+sudo systemctl stop php-fpm
 ```
 
-有効になりました
-
-## NGINX サービスコマンドリスト
-
-+ NGINX サービス状態コマンド
-
++ php-fpm サービス再起動コマンド
 ```
-sudo systemctl status nginx.service
+sudo systemctl restart php-fpm
 ```
 
-+ NGINX サービス起動コマンド
++ php-fpm コンフィグファイルの編集
 
 ```
-sudo systemctl start nginx
+sudo nano /etc/php-fpm.d/www.conf
 ```
 
-+ NGINX サービス停止コマンド
-
++ php-fpm コンフィグファイルの再読み込み
 ```
-sudo systemctl stop nginx
+sudo systemctl reload php-fpm
 ```
 
 + NGINX サービス再起動コマンド
-
 ```
 sudo systemctl restart nginx
 ```
 
-+ NGINX コンフィグファイルの編集
-
-```
-sudo nano /etc/nginx/nginx.conf
-```
-
-+ NGINX コンフィグファイルの再読み込み
-```
-sudo systemctl reload nginx
-```
-
 ***
-+ [TOP - README](README.md)
++ [pageTop](#pageTop)
++ [README](README.md)
+***
+> <a name="reference_website_php"></a> **PHP8.0 インストールの参考にした WebSite** <br>
+チュートリアル: Amazon Linux 2 に LAMP ウェブサーバーをインストールする<br>
+https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html<br>
+Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
+https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library<br>
+PHP マニュアル<br>
+https://www.php.net/manual/ja/
