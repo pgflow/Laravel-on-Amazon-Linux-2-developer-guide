@@ -121,8 +121,6 @@ sudo mv testphp.php /usr/share/nginx/html/testphp.php
 
 ## <a name="status_php-fpm_service"></a>php-fpm サービスコマンドリスト
 
-php-fpm サービスのコマンド
-
 + php-fpm サービス状態コマンド
 ```
 sudo systemctl status php-fpm.service
