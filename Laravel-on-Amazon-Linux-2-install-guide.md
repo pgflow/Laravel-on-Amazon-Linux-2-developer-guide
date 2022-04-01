@@ -1,174 +1,286 @@
-# <a name="pageTop"></a>PHP8.0 on Amazon Linux 2 install guide
+# <a name="pageTop"></a>Laravel on Amazon Linux 2 install guide
 
-作成日：2022/03/31<br>
+作成日：2022/04/01<br>
 
-このドキュメントは、Amazon Linux 2 に PHP8.0 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
+このドキュメントは、Amazon Linux 2 に Laravel 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
 ## 前提
 + NGINX をインストール済みであること。<br>-> [インストールガイド NGINX on Amazon Linux 2 install guide](NGINX-on-Amazon-Linux-2-install-guide.md) 
++ PHP をインストール済みであること。<br>-> [インストールガイド PHP on Amazon Linux 2 install guide](PHP-on-Amazon-Linux-2-install-guide.md) 
++ Composer をインストール済みであること。<br>-> [インストールガイド Composer on Amazon Linux 2 install guide](Composer-on-Amazon-Linux-2-install-guide.md) 
++ MariaDB をインストール済みであること。<br>-> [インストールガイド MariaDB on Amazon Linux 2 install guide](MariaDB-on-Amazon-Linux-2-install-guide.md) 
 
 ## 目次
-+ [PHP8.0 インストール](#install_php)
-+ [ブラウザでアクセスし PHP が動作出来るか確認する](#welcome_php)
-+ [php-fpm サービスコマンドリスト](#status_php-fpm_service)
-+ [PHP8.0 インストールの参考にした WebSite](#reference_website_php)
+***
++ [Laravel インストーラー](#install_Laravel)
+   + [Laravel インストーラー のセットアップ](#install_Laravel)
+   + [laravel コマンドリスト](#laravel_command)
+***
++ [Laravel で MariaDB を使用する準備](#setup_MariaDB_Laravel_db)
+   + [Laravel で使用するデータベースの作成](#setup_MariaDB_Laravel_db)
+   + [Laravel で使用するユーザーの作成](#setup_MariaDB_Laravel_user)
+   + [Laravel で使用するユーザーへ権限を付与](#setup_MariaDB_Laravel_user_setting)
+    + [作成したユーザーで権限設定したデータベースを確認](#setup_MariaDB_Laravel_user_db)
+***
+## <a name="install_Laravel"></a>Laravel インストーラー のセットアップ
+https://laravel.com/docs/9.x#the-laravel-installer
 
-## <a name="install_php"></a>PHP8.0 インストール
-
-インストールされている PHP のバージョンを確認する
+または、Laravel インストーラーをグローバル Composer 依存関係としてインストールします。
 ```
-php -v
+cd ~
+composer global require laravel/installer
 ```
-
-応答、php は存在していない
+応答
 ```
--bash: php: command not found
-```
-
-amazon-linux-extras というパッケージ管理システムから php8.0 をインストールします。
-
-パッケージ一覧を表示する
-```
-amazon-linux-extras
-```
-
-応答、表示されたパッケージリストに php8.0 があることを確認する
-```
-51  php8.0                   available    [ =stable ]
-```
-
-php8.0 インストール
-```
-sudo amazon-linux-extras install php8.0
-``` 
-
-応答、php-cli, php-fpm, php-mysqlnd, php-pdo, の　4 Packages が同時にインストールされます。
-y と入力して Enter でインストールを進めます
-
-```
-======================================================================================================
- Package               Arch             Version                     Repository                   Size
-======================================================================================================
-Installing:
- php-cli               x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           5.0 M
- php-fpm               x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           1.7 M
- php-mysqlnd           x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           189 k
- php-pdo               x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           122 k
-Installing for dependencies:
- libzip                x86_64           1.3.2-1.amzn2.0.1           amzn2-core                   62 k
- php-common            x86_64           8.0.16-1.amzn2              amzn2extra-php8.0           1.2 M
-
-Transaction Summary
-======================================================================================================
-Install  4 Packages (+2 Dependent packages)
-
-Total download size: 8.3 M
-Installed size: 41 M
-Is this ok [y/d/N]: y
+Changed current directory to /home/ec2-user/.config/composer
+Info from https://repo.packagist.org: #StandWithUkraine
+Using version ^4.2 for laravel/installer
+./composer.json has been created
+Running composer update laravel/installer
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 10 installs, 0 updates, 0 removals
+  - Locking ~~~
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 10 installs, 0 updates, 0 removals
+  - Downloading ~~~
+  - Installing ~~~
+6 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating autoload files
+8 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
 ```
 
-応答、表示されたパッケージリストに php8.0 が enabled になったことを確認する
+laravel コマンドをどこからでも呼び出せるように $PATH を .bash_profile へ追記します。
 ```
-51  php8.0=latest            enabled      [ =stable ]
-```
-
-インストールされているPHPのバージョンを確認する
-```
-php -v
+cd ~
+nano .bash_profile
 ```
 
-応答、PHP 8.0.16 がインストールされた
+編集前の .bash_profile は以下の通り
 ```
-PHP 8.0.16 (cli) (built: Mar  1 2022 00:31:45) ( NTS )
-Copyright (c) The PHP Group
-Zend Engine v4.0.16, Copyright (c) Zend Technologies
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
 ```
 
-php-fpm を起動します。
+PATH= へ以下のパスを追記します。<br>
 ```
-sudo systemctl start php-fpm
-```
-
-NGINX を再起動してインストールした php-fpm を適用します。
-```
-# sudo systemctl restart nginx
+$HOME/.config/composer/vendor/bin
 ```
 
-php-fpm 状態
-
+必ず " : "を先頭に付けて追記 <br>
 ```
-sudo systemctl status php-fpm.service
-```
-
-応答、Active: active (running) になったことを確認する
-```
-● php-fpm.service - The PHP FastCGI Process Manager
-   Loaded: loaded (/usr/lib/systemd/system/php-fpm.service; disabled; vendor preset: disabled)
-   Active: active (running) since Thu 2022-03-31 04:29:20 UTC; 4min 22s ago
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.config/composer/vendor/bin
 ```
 
-##  <a name="welcome_php"></a>ブラウザでアクセスし PHP が動作出来るか確認する
-
-phpversion() 関数でPHPバージョンを確認するphp実行ファイルを作成し、
-NGINX HTTP Server のデフォルトディレクトリへ移動します。
-
+編集した .bash_profile は以下の通り
 ```
-echo "<?php echo 'phpversion:'.phpversion(); ?>" > testphp.php
-sudo mv testphp.php /usr/share/nginx/html/testphp.php
-```
+# .bash_profile
 
-インスタンスのパブリックIPアドレスに testphp.php を付けてブラウザでアクセスし PHPのバージョンを確認する
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
 
-ブラウザに以下のページが表示されたらOK
+# User specific environment and startup programs
 
-![phpversion:8.0.16](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/phptest.png)
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.config/composer/vendor/bin
 
-## <a name="status_php-fpm_service"></a>php-fpm サービスコマンドリスト
-
-+ php-fpm サービス状態コマンド
-```
-sudo systemctl status php-fpm.service
+export PATH
 ```
 
-+ php-fpm サービス起動コマンド
+laravel を試してみます
 ```
-sudo systemctl start php-fpm
-```
-
-+ php-fpm サービス停止コマンド
-```
-sudo systemctl stop php-fpm
+laravel
 ```
 
-+ php-fpm サービス再起動コマンド
+応答
 ```
-sudo systemctl restart php-fpm
-```
-
-+ php-fpm コンフィグファイルの編集
-
-```
-sudo nano /etc/php-fpm.d/www.conf
+-bash: laravel: command not found
 ```
 
-+ php-fpm コンフィグファイルの再読み込み
+.bash_profile が適用されていないので再読み込みをします
 ```
-sudo systemctl reload php-fpm
+source .bash_profile
 ```
 
-+ NGINX サービス再起動コマンド
+もう一度 laravel を試してみます
 ```
-sudo systemctl restart nginx
+laravel
+```
+
+応答、Laravel Installer がインストールできました。コマンドの一覧も読めます。
+```
+Laravel Installer 4.2.10
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  completion  Dump the shell completion script
+  help        Display help for a command
+  list        List commands
+  new         Create a new Laravel application
+```
+
+## <a name="laravel_command"></a>laravel コマンドリスト
+
++ laravel アプリケーションの新規作成コマンド
+```
+例：laravel new example-app
+```
+
+```
+laravel new 作成するアプリケーション名
+```
+
+***
+## <a name="setup_MariaDB_Laravel_db"></a>Laravel で使用するデータベースの作成
+
+MariaDB へ root でログインします。
+```
+mariadb -u root -p
+```
+パスワードが聞かれますので、設定した MariaDB の root パスワードを入力します。
+```
+Enter password:
+```
+応答
+```
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.5.10-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+```
+create database "作成するデータベース名" を実行します。
+```
+create database laravel_db;
+```
+応答
+```
+Query OK, 1 row affected (0.000 sec)
+```
+
+作成したデータベースを確認します。
+```
+show databases;
+```
+
+応答、"laravel_db  "が確認できます。
+```
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| laravel_db         |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.000 sec)
+```
+
+## <a name="setup_MariaDB_Laravel_user"></a>Laravel で使用するユーザーの作成
+
+localhost のみ接続できる ユーザーの作成
+```
+create user 'ユーザー名'@'localhost' identified by 'パスワード';
+```
+例
+```
+create user 'Laravel'@'localhost' identified by 'secretpassword';
+```
+何処からでも接続できる ユーザーの作成
+```
+create user 'ユーザー名' identified by 'パスワード'; 
+```
+例
+```
+create user 'Laravel' identified by 'secretpassword';
+```
+
+ユーザーの情報を確認する
+```
+select * from mysql.user where user='laravel'\G
+```
+
+応答、ユーザーが作成されたことが確認出来ます。
+```
+*************************** 1. row ***************************
+                  Host: %
+                  User: laravel
+```
+
+## <a name="setup_MariaDB_Laravel_user_setting"></a>Laravel で使用するユーザーへデータベース レベルの権限を設定
+grant all で全ての権限が対象のデータベースに対して指定したユーザーに設定されます。
+```
+grant all on データベース名.* to ユーザー名@接続元;
+```
+
+例：localhost のみ接続できるユーザーの設定
+```
+grant all on laravel_db.* to Laravel@localhost;
+```
+例：何処からでも接続できる ユーザーの設定
+```
+grant all on laravel_db.* to laravel;
+```
+
+## <a name="setup_MariaDB_Laravel_user_db"></a>作成したユーザーで権限設定したデータベースを確認
+作成したユーザで mariadb にログインします。
+```
+mariadb -u laravel -p
+```
+ログイン出来たら、権限を設定したデータベースが見えるか確認
+```
+show databases;
+```
+
+応答、"laravel_db" が表示されたので設定が出来ています。
+```
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| laravel_db         |
++--------------------+
+2 rows in set (0.000 sec)
 ```
 
 ***
 + [pageTop](#pageTop)
 + [README](README.md)
 ***
-> <a name="reference_website_php"></a> **PHP8.0 インストールの参考にした WebSite** <br>
-チュートリアル: Amazon Linux 2 に LAMP ウェブサーバーをインストールする<br>
-https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html<br>
-Linux インスタンス用ユーザーガイド Extras library (Amazon Linux 2)<br>
-https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/amazon-linux-ami-basics.html#extras-library<br>
-PHP マニュアル<br>
-https://www.php.net/manual/ja/
+> <a name="reference_website_php"></a> **セットアップの参考にした WebSite** <br>
+**Laravel**<br>
+Laravel インストーラー<br>
+https://laravel.com/docs/9.x#the-laravel-installer<br>
+Laravel ドキュメント<br>
+https://laravel.com/docs/9.x<br>
+**MariaDB**<br>
+https://www.dbonline.jp/mariadb/<br>
