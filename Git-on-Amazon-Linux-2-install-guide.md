@@ -7,7 +7,6 @@
 ## 目次
 + [Git インストール](#install_Git)
 
-## Git インストール
 ## <a name="install_Git"></a>Git インストール
 Git がインストール済みか確認する
 ```
