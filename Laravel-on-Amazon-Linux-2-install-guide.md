@@ -22,7 +22,12 @@
    + [Laravel で使用するユーザーへ権限を付与](#setup_MariaDB_Laravel_user_setting)
     + [作成したユーザーで権限設定したデータベースを確認](#setup_MariaDB_Laravel_user_db)
 ***
-+ Laravel セットアップ
++ Laravel プロジェクトディレクトリの作成
+   + ディレクトリを作成
+   + ディレクトリのユーザーを変更する
+***
++ NGINX セットアップ
+   + nginx.conf に Laravel server の設定を書き足す。
 ***
 
 ## <a name="install_Laravel"></a>Laravel インストーラー のセットアップ
