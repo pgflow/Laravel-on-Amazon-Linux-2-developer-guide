@@ -22,6 +22,9 @@
    + [Laravel で使用するユーザーへ権限を付与](#setup_MariaDB_Laravel_user_setting)
     + [作成したユーザーで権限設定したデータベースを確認](#setup_MariaDB_Laravel_user_db)
 ***
++ Laravel セットアップ
+***
+
 ## <a name="install_Laravel"></a>Laravel インストーラー のセットアップ
 https://laravel.com/docs/9.x#the-laravel-installer
 
@@ -277,10 +280,11 @@ MariaDB [(none)]> show databases;
 + [README](README.md)
 ***
 > <a name="reference_website_php"></a> **セットアップの参考にした WebSite** <br>
-**Laravel**<br>
+**-Laravel-**<br>
 Laravel インストーラー<br>
 https://laravel.com/docs/9.x#the-laravel-installer<br>
 Laravel ドキュメント<br>
 https://laravel.com/docs/9.x<br>
-**MariaDB**<br>
+**-MariaDB-**<br>
+MariaDB入門<br>
 https://www.dbonline.jp/mariadb/<br>
