@@ -1,6 +1,6 @@
 # <a name="pageTop"></a>MariaDB on Amazon Linux 2 install guide
 
-作成日：2022/03/28<br>
+作成日：2022/04/01<br>
 
 このドキュメントは、Amazon Linux 2 に MariaDB 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
@@ -10,7 +10,7 @@
 + [MariaDB サービスコマンドリスト](#status_MariaDB_service)
 + [MariaDB インストールの参考にしたWebSite](#reference_website_MariaDB)
 
-## <a name="install_nginx"></a>MariaDB インストール
+## <a name="install_MariaD"></a>MariaDB インストール
 
 インストールされている MariaDB のバージョンを確認する
 ```
