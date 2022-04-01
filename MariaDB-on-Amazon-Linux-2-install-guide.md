@@ -1,6 +1,3 @@
-MariaDB on Amazon Linux 2 install guide
-
-
 # <a name="pageTop"></a>MariaDB on Amazon Linux 2 install guide
 
 作成日：2022/03/28<br>
