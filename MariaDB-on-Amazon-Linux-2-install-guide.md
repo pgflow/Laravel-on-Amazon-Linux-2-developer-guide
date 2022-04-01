@@ -15,7 +15,6 @@
 インストールされている MariaDB のバージョンを確認する
 ```
 mariadb -v
-
 ```
 
 応答、MariaDB は存在していない
@@ -91,6 +90,7 @@ MariaDB コンソールからログアウトします
 ```
 exit
 ```
+
 応答
 ```
 MariaDB [(none)]> exit
@@ -100,11 +100,13 @@ Bye
 
 ## <a name="mysql_secure_installation"></a>MariaDB 初期設定 mysql_secure_installation の実行
 https://mariadb.com/kb/ja/mysql_secure_installation/
+
+mysql_secure_installation を実行します。
 ```
 sudo mysql_secure_installation
 ```
-応答
 
+応答
 ```
 NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
       SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
@@ -125,8 +127,10 @@ can log into the MariaDB root user without the proper authorisation.
 You already have your root account protected, so you can safely answer 'n'.
 
 Switch to unix_socket authentication [Y/n] n
-すでにrootアカウントが保護されているので、安全に「n」と答えることができます。 
+```
+すでに root アカウントが保護されているので、安全に「n」と答えることができます。 
 n と入力して Enter 。
+```
  ... skipping.
 
 You already have your root account protected, so you can safely answer 'n'.
@@ -134,7 +138,6 @@ You already have your root account protected, so you can safely answer 'n'.
 Change the root password? [Y/n] y
 ```
 root パスワードを設定するため、y と入力して Enter 。
-
 ```
 New password:　新しいパスワードを入力
 Re-enter new password:　上に入力したのと同じパスワードを入力
@@ -195,7 +198,6 @@ All done!  If you've completed all of the above steps, your MariaDB
 installation should now be secure.
 
 Thanks for using MariaDB!
-
 ```
 
 ## <a name="enabled_MariaDB_service"></a>MariaDB プロセスの自動起動設定
