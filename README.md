@@ -18,5 +18,5 @@
 + [Composer](Composer-on-Amazon-Linux-2-install-guide.md)
 + [MariaDB](MariaDB-on-Amazon-Linux-2-install-guide.md)
 + [Git](Git-on-Amazon-Linux-2-install-guide.md)
-+ [Laravel](test)
++ [Laravel](Laravel-on-Amazon-Linux-2-install-guide.md)
 + [Visual Studio Code](test)
