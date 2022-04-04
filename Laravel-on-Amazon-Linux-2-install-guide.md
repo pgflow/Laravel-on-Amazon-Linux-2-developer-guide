@@ -22,9 +22,11 @@
    + [Laravel で使用するユーザーへ権限を付与](#setup_MariaDB_Laravel_user_setting)
     + [作成したユーザーで権限設定したデータベースを確認](#setup_MariaDB_Laravel_user_db)
 ***
-+ Laravel プロジェクトディレクトリの作成
-   + ディレクトリを作成
-   + ディレクトリのユーザーを変更する
++ [Laravel プロジェクトの準備](#setup_laravel_new_project)
+   + [ディレクトリを作成する](#mkdir_www)
+   + [Laravel プロジェクトを作成する](#laravel_new_project)
+   + [インストールのエラー解決 ext-dom extension のインストール](#laravel_new_error)
+   + [Laravel プロジェクトを再度作成する](#laravel_new_project_re)
 ***
 + NGINX セットアップ
    + nginx.conf に Laravel server の設定を書き足す。
@@ -279,6 +281,210 @@ MariaDB [(none)]> show databases;
 +--------------------+
 2 rows in set (0.000 sec)
 ```
+
+## <a name="#setup_laravel_new_project"></a>Laravel プロジェクトの準備
+<a name="#mkdir_www"></a>user ディレクトリ内に www ディレクトリを作成する
+```
+cd ~
+mkdir www
+ls
+```
+
+応答
+```
+www
+```
+
+## <a name="#laravel_new_project"></a>Laravel プロジェクトを作成する
+
+www ディレクトリへ移動
+```
+cd www
+```
+
+laravel new コマンドでプロジェクトを作成する
+
+```
+laravel new アプリケーション名
+```
+
+例
+```
+laravel new example-app
+```
+実行すると次のインストールのエラーが表示されました、次の手順でエラーを解決します。
+
+ext-dom エクステンションを必要としている
+```
+ _                               _
+| |                             | |
+| |     __ _ _ __ __ ___   _____| |
+| |    / _` | '__/ _` \ \ / / _ \ |
+| |___| (_| | | | (_| |\ V /  __/ |
+|______\__,_|_|  \__,_| \_/ \___|_|
+
+Creating a "laravel/laravel" project at "./example-app"
+Info from https://repo.packagist.org: #StandWithUkraine
+Installing laravel/laravel (v9.1.3)
+  - Downloading laravel/laravel (v9.1.3)
+  - Installing laravel/laravel (v9.1.3): Extracting archive
+Created project in /home/ec2-user/www/example-app
+> @php -r "file_exists('.env') || copy('.env.example', '.env');"
+Loading composer repositories with package information
+Updating dependencies
+Your requirements could not be resolved to an installable set of packages.
+
+  Problem 1
+    - phpunit/phpunit[9.5.10, ..., 9.5.x-dev] require ext-dom * -> it is missing from your system. Install or enable PHP's dom extension.
+    - Root composer.json requires phpunit/phpunit ^9.5.10 -> satisfiable by phpunit/phpunit[9.5.10, ..., 9.5.x-dev].
+
+To enable extensions, verify that they are enabled in your .ini files:
+    - /etc/php.ini
+    - /etc/php.d/20-bz2.ini
+    - /etc/php.d/20-calendar.ini
+    - /etc/php.d/20-ctype.ini
+    - /etc/php.d/20-curl.ini
+    - /etc/php.d/20-exif.ini
+    - /etc/php.d/20-fileinfo.ini
+    - /etc/php.d/20-ftp.ini
+    - /etc/php.d/20-gettext.ini
+    - /etc/php.d/20-iconv.ini
+    - /etc/php.d/20-mysqlnd.ini
+    - /etc/php.d/20-pdo.ini
+    - /etc/php.d/20-phar.ini
+    - /etc/php.d/20-sockets.ini
+    - /etc/php.d/20-sqlite3.ini
+    - /etc/php.d/20-tokenizer.ini
+    - /etc/php.d/20-zip.ini
+    - /etc/php.d/30-mysqli.ini
+    - /etc/php.d/30-pdo_mysql.ini
+    - /etc/php.d/30-pdo_sqlite.ini
+You can also run `php --ini` in a terminal to see which files are used by PHP in CLI mode.
+Alternatively, you can run Composer with `--ignore-platform-req=ext-dom` to temporarily ignore these required extensions.
+```
+
+## <a name="#laravel_new_error"></a>インストールのエラー解決 ext-dom extension のインストール
+
+ext-dom extension は php-xml に含まれるので、php-xml をインストール
+>How do I install the dom extension for PHP7?<br>
+https://laracasts.com/discuss/channels/servers/how-do-i-install-the-dom-extension-for-php7
+```
+sudo yum install php-xml
+```
+
+応答
+```
+Dependencies Resolved
+
+======================================================================================================
+ Package            Arch              Version                      Repository                    Size
+======================================================================================================
+Installing:
+ php-xml            x86_64            8.0.16-1.amzn2               amzn2extra-php8.0            173 k
+Installing for dependencies:
+ libxslt            x86_64            1.1.28-6.amzn2               amzn2-core                   240 k
+
+Transaction Summary
+======================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 413 k
+Installed size: 1.2 M
+```
+y と入力してインストールを続行します。
+```
+Is this ok [y/d/N]: y
+```
+
+応答
+```
+Downloading packages:
+(1/2): libxslt-1.1.28-6.amzn2.x86_64.rpm                                       | 240 kB  00:00:00
+(2/2): php-xml-8.0.16-1.amzn2.x86_64.rpm                                       | 173 kB  00:00:00
+------------------------------------------------------------------------------------------------------
+Total                                                                 2.1 MB/s | 413 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libxslt-1.1.28-6.amzn2.x86_64                                                      1/2
+  Installing : php-xml-8.0.16-1.amzn2.x86_64                                                      2/2
+  Verifying  : php-xml-8.0.16-1.amzn2.x86_64                                                      1/2
+  Verifying  : libxslt-1.1.28-6.amzn2.x86_64                                                      2/2
+
+Installed:
+  php-xml.x86_64 0:8.0.16-1.amzn2
+
+Dependency Installed:
+  libxslt.x86_64 0:1.1.28-6.amzn2
+
+Complete!
+```
+
+## <a name="#laravel_new_project_re"></a>Laravel プロジェクトを再度作成する
+作成に失敗した laravel プロジェクトを削除します。
+```
+cd ~/www/
+rm -rf 作成したlaravelアプリケーション名
+```
+
+例
+```
+cd ~/www/
+rm -rf example-app
+```
+
+応答
+```
+ _                               _
+| |                             | |
+| |     __ _ _ __ __ ___   _____| |
+| |    / _` | '__/ _` \ \ / / _ \ |
+| |___| (_| | | | (_| |\ V /  __/ |
+|______\__,_|_|  \__,_| \_/ \___|_|
+
+Creating a "laravel/laravel" project at "./example-app"
+Info from https://repo.packagist.org: #StandWithUkraine
+Installing laravel/laravel (v9.1.3)
+  - Installing laravel/laravel (v9.1.3): Extracting archive
+Created project in /home/ec2-user/www/example-app
+> @php -r "file_exists('.env') || copy('.env.example', '.env');"
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 108 installs, 0 updates, 0 removals
+  - Locking brick/math (0.9.3)
+~~~
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 108 installs, 0 updates, 0 removals
+  - Installing doctrine/inflector (2.0.4): Extracting archive
+~~~
+71 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+Discovered Package: laravel/sail
+Discovered Package: laravel/sanctum
+Discovered Package: laravel/tinker
+Discovered Package: nesbot/carbon
+Discovered Package: nunomaduro/collision
+Discovered Package: spatie/laravel-ignition
+Package manifest generated successfully.
+78 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+No publishable resources for tag [laravel-assets].
+Publishing complete.
+> @php artisan key:generate --ansi
+Application key set successfully.
+
+Application ready! Build something amazing.
+```
+laravel プロジェクトが正常に作成されました。
+
+
+
+
 
 ***
 + [pageTop](#pageTop)
