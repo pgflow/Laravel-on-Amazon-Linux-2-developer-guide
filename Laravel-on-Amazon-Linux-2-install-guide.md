@@ -282,8 +282,8 @@ MariaDB [(none)]> show databases;
 2 rows in set (0.000 sec)
 ```
 
-## <a name="#setup_laravel_new_project"></a>Laravel プロジェクトの準備
-<a name="#mkdir_www"></a>user ディレクトリ内に www ディレクトリを作成する
+## <a name="setup_laravel_new_project"></a>Laravel プロジェクトの準備
+<a name="mkdir_www"></a>user ディレクトリ内に www ディレクトリを作成する
 ```
 cd ~
 mkdir www
@@ -295,7 +295,7 @@ ls
 www
 ```
 
-## <a name="#laravel_new_project"></a>Laravel プロジェクトを作成する
+## <a name="laravel_new_project"></a>Laravel プロジェクトを作成する
 
 www ディレクトリへ移動
 ```
@@ -363,7 +363,7 @@ You can also run `php --ini` in a terminal to see which files are used by PHP in
 Alternatively, you can run Composer with `--ignore-platform-req=ext-dom` to temporarily ignore these required extensions.
 ```
 
-## <a name="#laravel_new_error"></a>インストールのエラー解決 ext-dom extension のインストール
+## <a name="laravel_new_error"></a>インストールのエラー解決 ext-dom extension のインストール
 
 ext-dom extension は php-xml に含まれるので、php-xml をインストール
 >How do I install the dom extension for PHP7?<br>
@@ -421,7 +421,7 @@ Dependency Installed:
 Complete!
 ```
 
-## <a name="#laravel_new_project_re"></a>Laravel プロジェクトを再度作成する
+## <a name="laravel_new_project_re"></a>Laravel プロジェクトを再度作成する
 作成に失敗した laravel プロジェクトを削除します。
 ```
 cd ~/www/
