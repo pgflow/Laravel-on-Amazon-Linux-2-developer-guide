@@ -17,6 +17,7 @@
 
 インストールされている PHP のバージョンを確認する
 ```
+cd ~
 php -v
 ```
 
@@ -120,8 +121,12 @@ sudo mv testphp.php /usr/share/nginx/html/testphp.php
 インスタンスのパブリックIPアドレスに testphp.php を付けてブラウザでアクセスし PHPのバージョンを確認する
 
 ブラウザに以下のページが表示されたらOK
-
 ![phpversion:8.0.16](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/phptest.png)
+
+作成した、testphp.php を削除します。
+```
+sudo rm /usr/share/nginx/html/testphp.php
+```
 
 ## <a name="status_php-fpm_service"></a>php-fpm サービスコマンドリスト
 
