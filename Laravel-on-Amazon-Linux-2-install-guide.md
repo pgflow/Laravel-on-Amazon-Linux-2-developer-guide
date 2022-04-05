@@ -44,6 +44,7 @@
 cd ~
 composer global require laravel/installer
 ```
+
 応答
 ```
 Changed current directory to /home/ec2-user/.config/composer
