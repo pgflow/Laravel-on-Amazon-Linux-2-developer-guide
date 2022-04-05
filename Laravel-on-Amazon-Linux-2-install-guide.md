@@ -519,17 +519,52 @@ cp nginx.conf /home/ec2-user/nginx.conf
 
 ## <a neme="sftp_get_nginxconf"></a>sftp 接続して nginx.conf をダウンロード
 
-sftp 接続したウィンドウから<br>
-get ファイル名 ダウンロード先フォルダをドロップするとファイルパスが入ります。
+新しい Terminal ウィンドウを開きます。<br>
+※Windowsであれば、command プロンプト、powershell、Windows Terminal を開きます。<br>※macOS の場合は、新しい Terminal を開きます。
+
+接続方法の説明
 ```
-sftp> get nginx.conf C:\Users\ユーザー名\Downloads
+sftp -i キーファイル.pem ユーザー名@パブリックIPv4
 ```
 
 例
 ```
-sftp> get nginx.conf C:\Users\username\Downloads
+sftp -i .\.ssh\LightsailDefaultKey-ap-northeast-1.pem ec2-user@192.168.0.100
 ```
 
+応答、sftp> と表示されたのを確認。
+```
+sftp>
+```
+
+nginx.conf があるか確認します。
+```
+cd /home/ec2-user
+ls -la
+```
+
+応答
+```
+-rw-r--r--    1 ec2-user ec2-user     3853 Apr  5 06:31 nginx.conf
+```
+
+get コマンドで、nginx.conf を指定します。
+```
+get nginx.conf
+```
+
+sftp 接続したウィンドウへ<br>
+ダウンロード先フォルダをドロップするとファイルパスが入ります。
+```
+get nginx.conf C:\Users\ユーザー名\Downloads
+```
+
+例
+```
+get nginx.conf C:\Users\username\Downloads
+```
+
+上記コマンドを Enter すると<br>
 自分のPCのダウンロードフォルダに nginx.conf が保存されました。
 ![nginx.conf](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/nginx_conf_download.png)
 
@@ -584,9 +619,10 @@ server {
     #root /srv/example.com/public;
     root /srv/www/example-app/public;
     
-    ### nginx デフォルト設定を読み込む設定を追記（phpに影響します）
+    ### START nginx デフォルト設定を読み込む設定 >（phpに影響します）
     # Load configuration files for the default server block.
     include /etc/nginx/default.d/*.conf;
+    ### -END- nginx デフォルト設定を読み込む設定
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";
@@ -669,9 +705,10 @@ http {
         #root /srv/example.com/public;
         root /srv/www/example-app/public;
         
-        ### nginx デフォルト設定を読み込む設定を追記（phpに影響します）
+        ### START nginx デフォルト設定を読み込む設定 >（phpに影響します）
         # Load configuration files for the default server block.
         include /etc/nginx/default.d/*.conf;
+        ### -END- nginx デフォルト設定を読み込む設定
 
         add_header X-Frame-Options "SAMEORIGIN";
         add_header X-Content-Type-Options "nosniff";
@@ -750,20 +787,25 @@ http {
 ```
 
 ## <a neme="sftp_put_nginxconf"></a>sftp 接続して nginx.conf をアップロード
-sftp 接続したウィンドウから
-put nginx.conf ←をドロップ
-以下のような応答になるので、Enter。
+sftp 接続したウィンドウで、
+ユーザーディレクトリへ移動し、put コマンドを入力
 ```
-sftp> put C:\Users\ユーザー名\Downloads\nginx.conf
+cd /home/ec2-user
+put 
+```
+
+編集した nginx.conf をドロップすると以下のようにファイルパスが入力されるので、Enter 。
+```
+put C:\Users\username\Downloads\nginx.conf
 ```
 
 応答、100% でアップロード完了
 ```
-Uploading C:/Users/ユーザー名/Downloads/nginx.conf to /home/ec2-user/nginx.conf
-C:/Users/ユーザー名/Downloads/nginx.conf                                                      100% 3955   247.4KB/s   00:00
+Uploading C:/Users/username/Downloads/nginx.conf to /home/ec2-user/nginx.conf
+C:/Users/username/Downloads/nginx.conf                                                      100% 3955   247.4KB/s   00:00
 ```
 
-ssh 接続した window から
+**ssh 接続した Terminal window に変更**<br>
 nginx.conf を移動する
 ```
 cd ~
@@ -780,9 +822,7 @@ ls -la
 
 応答
 ```
-~~~
 -rw-rw-r--  1 ec2-user ec2-user 3853 Apr  4 06:40 nginx.conf
-~~~
 ```
 
 以下のコマンドで権限を変更します。
@@ -799,9 +839,7 @@ ls -la
 
 応答
 ```
-~~~
 -rw-r--r--  1 root root 3853 Apr  4 06:40 nginx.conf
-~~~
 ```
 
 NGINX コンフィグファイルの再読み込みをして nginx.conf の変更を適用します。
@@ -831,9 +869,7 @@ ls -la
 
 応答 storage ディレクトリのユーザーとグループが webサーバー apache ではない
 ```
-~~~
 drwxrwxr-x  5 ec2-user ec2-user     46 Mar 29 14:48 storage
-~~~
 ```
 
 storage のユーザーとグループを、webサーバー のユーザー apache に変更する
@@ -849,8 +885,7 @@ drwxrwxr-x  5 apache   apache       46 Mar 29 14:48 storage
 ```
 変更出来た。
 
-もう一度インストールした Laravel へブラウザでアクセス出来るか確認する
-インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel が動いているのを確認する。
+もう一度 インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel が動いているのを確認する。
 ![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Laravel_beginning.png)
 
 ***
