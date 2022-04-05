@@ -805,14 +805,13 @@ Uploading C:/Users/username/Downloads/nginx.conf to /home/ec2-user/nginx.conf
 C:/Users/username/Downloads/nginx.conf                                                      100% 3955   247.4KB/s   00:00
 ```
 
+## <a neme="permission_nginxconf"></a>nginx.conf のユーザーと権限の変更
 **ssh 接続した Terminal window に変更**<br>
-nginx.conf を移動する
+ユーザーディレクトリへアップロードした nginx.conf を移動する
 ```
 cd ~
 sudo mv nginx.conf /etc/nginx/nginx.conf
 ```
-
-## <a neme="permission_nginxconf"></a>nginx.conf のユーザーと権限の変更
 
 変更して移動した nginx.conf のユーザーと権限を確認して変更します
 ```
@@ -854,7 +853,8 @@ Laravel へブラウザでアクセス出来るか確認する
 ブラウザに以下の以下のエラーが表示されます
 ![laravel_storage_permission](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/laravel_storage_permission.png)
 
-エラー抜粋
+エラー抜粋<br>
+Laravel storage ディレクトリの権限変更 が必要、次の手順で変更します。
 ```
 The stream or file "/srv/www/example-app/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied The exception occurred while attempting to log
 ```
@@ -867,7 +867,7 @@ cd /srv/www/example-app/
 ls -la
 ```
 
-応答 storage ディレクトリのユーザーとグループが webサーバー apache ではない
+応答 storage ディレクトリのユーザーとグループが webサーバー apache ではなく、ec2-user になっている。
 ```
 drwxrwxr-x  5 ec2-user ec2-user     46 Mar 29 14:48 storage
 ```
