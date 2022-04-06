@@ -620,8 +620,9 @@ server {
     ### インストールした laravel の public の場所を書く
     #root /srv/example.com/public;
     root /srv/www/example-app/public;
-    
+
     ### START nginx デフォルト設定を読み込む設定 >（phpに影響します）
+    ### fastcgi_pass と fastcgi_param を調べて書き換える場合は不要です。
     # Load configuration files for the default server block.
     include /etc/nginx/default.d/*.conf;
     ### -END- nginx デフォルト設定を読み込む設定
@@ -641,21 +642,89 @@ server {
     location = /robots.txt  { access_log off; log_not_found off; }
  
     error_page 404 /index.php;
- 
+```
+
+**fastcgi_pass と fastcgi_param の補足説明**
+
+fastcgi_pass を調べるため、php-fpm.conf を開いて確認します。
+```
+nano /etc/nginx/conf.d/php-fpm.conf
+```
+
+応答（ upstream php-fpm を探す）
+```
+# PHP-FPM FastCGI server
+# network or unix domain socket configuration
+
+### upstream php-fpm に書かれているのでコピーしてメモしておく。###
+upstream php-fpm {
+        server unix:/run/php-fpm/www.sock;
+}
+```
+fastcgi_pass
+```
+server unix:/run/php-fpm/www.sock;
+```
+
+fastcgi_param を調べるため、php-fpm.conf を開いて確認します。
+```
+nano /etc/nginx/fastcgi.conf
+```
+
+応答（ SCRIPT_FILENAME を抜粋）
+```
+### SCRIPT_FILENAME 行に書かれているのでコピーしてメモしておく。###
+fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+```
+
+fastcgi_param
+```
+$document_root$fastcgi_script_name;
+```
+
+変更前
+``` 
     location ~ \.php$ {
-        ### コメントアウト※nginx デフォルト設定を読み込むため
-        #fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
-        #fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }
- 
     location ~ /\.(?!well-known).* {
         deny all;
     }
 }
 ```
 
-書き換えた内容は以下の通り、nginx.conf を保存します。
+変更後（fastcgi_pass と fastcgi_param 書き換える）
+```
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php-fpm/www.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+**※ nginx デフォルト設定を読み込む場合は、fastcgi_pass と fastcgi_param をコメントアウトする。**
+```
+#server { 内に以下を追記しておく。
+# Load configuration files for the default server block.
+include /etc/nginx/default.d/*.conf;
+```
+
+変更後（fastcgi_pass と fastcgi_param をコメントアウト）
+```
+    location ~ \.php$ {
+        #fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+        #fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+```
+
+書き換えた内容は以下の通り、nginx.conf を保存します。（※nginx デフォルト設定を読み込む場合）
 ```
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
@@ -864,7 +933,7 @@ The stream or file "/srv/www/example-app/storage/logs/laravel.log" could not be 
 
 ## <a neme="permission_laravel_storage"></a>Laravel storage ディレクトリの権限変更
 
-storage 以下のファイルに webサーバーで実行している PHP（php-fpm） から書き込みが出来ないためエラーが出ている、現在の php-fpm 実行ユーザーとグループを確認します。
+storage 以下のファイルに webサーバーで実行している PHP（php-fpm） から書き込みが出来ないためエラーが出ている、設定に必要な現在の php-fpm 実行ユーザーとグループを確認します。
 
 php-fpm の www.conf ファイルを確認します。
 ```
@@ -872,7 +941,7 @@ nano /etc/php-fpm.d/www.conf
 ```
 
 応答（ Unix user/group of processes を抜粋）<be>
-user = と group = の名前を確認する。
+user = と group = の名前を確認してメモします。
 ```
 ; Unix user/group of processes
 ; Note: The user is mandatory. If the group is not set, the default user's group
