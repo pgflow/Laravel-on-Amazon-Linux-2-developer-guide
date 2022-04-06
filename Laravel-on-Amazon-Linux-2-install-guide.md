@@ -286,7 +286,7 @@ MariaDB [(none)]> show databases;
 +--------------------+
 2 rows in set (0.000 sec)
 ```
-
+***
 ## <a name="setup_laravel_new_project"></a>Laravel プロジェクトの準備
 <a name="mkdir_www"></a>/srv/ ディレクトリ内に www ディレクトリを作成する
 ```
@@ -503,6 +503,7 @@ Application ready! Build something amazing.
 ```
 laravel プロジェクトが正常に作成されました。
 
+***
 ## <a neme="nginxconf"></a>NGINX へ Laravel プロジェクトの設定準備
 
 既存の nginx.conf ファイルをコピーして Laravel に必要な設定を書き足して、書き換えた、nginx.conf に置き換えます。
@@ -852,6 +853,7 @@ Laravel へブラウザでアクセス出来るか確認する
 インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel が動いているのを確認する。
 
 ブラウザに以下の以下のエラーが表示されます
+
 ![laravel_storage_permission](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/laravel_storage_permission.png)
 
 エラー抜粋<br>
@@ -887,6 +889,7 @@ drwxrwxr-x  5 apache   apache       46 Mar 29 14:48 storage
 変更出来た。
 
 もう一度 インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel が動いているのを確認する。
+
 ![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Laravel_beginning.png)
 
 ***
