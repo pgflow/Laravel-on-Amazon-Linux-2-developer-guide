@@ -517,7 +517,7 @@ sudo cp nginx.conf nginx.conf.cp
 
 nginx.conf を、user ディレクトリへコピーする
 ```
-cp nginx.conf /home/ec2-user/nginx.conf
+cp /etc/nginx/nginx.conf /home/ec2-user/nginx.conf
 ```
 
 ## <a name="sftp_get_nginxconf"></a>sftp 接続して nginx.conf をダウンロード
@@ -664,7 +664,7 @@ upstream php-fpm {
 ```
 fastcgi_pass
 ```
-server unix:/run/php-fpm/www.sock;
+unix:/run/php-fpm/www.sock;
 ```
 
 fastcgi_param を調べるため、php-fpm.conf を開いて確認します。
