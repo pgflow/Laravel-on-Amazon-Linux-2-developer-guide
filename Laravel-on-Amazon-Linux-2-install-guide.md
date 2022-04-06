@@ -645,8 +645,7 @@ server {
 ```
 
 **fastcgi_pass と fastcgi_param を書き換える場合の補足説明**<br>
-※ Load configuration files for the default server block. を書き足す場合は
-<a name="nginx_default">次へ進んでください。</a>
+※ Load configuration files for the default server block. を書き足す場合は、[次へ進んでください。](#nginx_default)
 
 fastcgi_pass を調べるため、php-fpm.conf を開いて確認します。
 ```
