@@ -505,7 +505,7 @@ laravel プロジェクトが正常に作成されました。
 
 ***
 
-## <a neme="nginxconf"></a>NGINX へ Laravel プロジェクトの設定準備
+## <a name="nginxconf"></a>NGINX へ Laravel プロジェクトの設定準備
 
 既存の nginx.conf ファイルをコピーして Laravel に必要な設定を書き足して、書き換えた、nginx.conf に置き換えます。
 
@@ -520,7 +520,7 @@ nginx.conf を、user ディレクトリへコピーする
 cp nginx.conf /home/ec2-user/nginx.conf
 ```
 
-## <a neme="sftp_get_nginxconf"></a>sftp 接続して nginx.conf をダウンロード
+## <a name="sftp_get_nginxconf"></a>sftp 接続して nginx.conf をダウンロード
 
 新しい Terminal ウィンドウを開きます。<br>
 ※Windowsであれば、command プロンプト、powershell、Windows Terminal を開きます。<br>※macOS の場合は、新しい Terminal を開きます。
@@ -571,7 +571,7 @@ get nginx.conf C:\Users\username\Downloads
 自分のPCのダウンロードフォルダに nginx.conf が保存されました。
 ![nginx.conf](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/nginx_conf_download.png)
 
-## <a neme="edit_nginxconf"></a>nginx.conf を編集 Laravel server の設定を書き足す
+## <a name="edit_nginxconf"></a>nginx.conf を編集 Laravel server の設定を書き足す
 
 Visual Studio Code 等で nginx.conf を開きます。
 
@@ -857,7 +857,7 @@ http {
 }
 ```
 
-## <a neme="sftp_put_nginxconf"></a>sftp 接続して nginx.conf をアップロード
+## <a name="sftp_put_nginxconf"></a>sftp 接続して nginx.conf をアップロード
 sftp 接続したウィンドウで、
 ユーザーディレクトリへ移動し、put コマンドを入力
 ```
@@ -876,7 +876,7 @@ Uploading C:/Users/username/Downloads/nginx.conf to /home/ec2-user/nginx.conf
 C:/Users/username/Downloads/nginx.conf                                                      100% 3955   247.4KB/s   00:00
 ```
 
-## <a neme="permission_nginxconf"></a>nginx.conf のユーザーと権限の変更
+## <a name="permission_nginxconf"></a>nginx.conf のユーザーと権限の変更
 **ssh 接続した Terminal window に変更**<br>
 ユーザーディレクトリへアップロードした nginx.conf を移動する
 ```
@@ -931,7 +931,7 @@ Laravel storage ディレクトリの権限変更 が必要、次の手順で変
 The stream or file "/srv/www/example-app/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied The exception occurred while attempting to log
 ```
 
-## <a neme="permission_laravel_storage"></a>Laravel storage ディレクトリの権限変更
+## <a name="permission_laravel_storage"></a>Laravel storage ディレクトリの権限変更
 
 storage 以下のファイルに webサーバーで実行している PHP（php-fpm） から書き込みが出来ないためエラーが出ている、設定に必要な現在の php-fpm 実行ユーザーとグループを確認します。
 
