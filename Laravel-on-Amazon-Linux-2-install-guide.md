@@ -872,7 +872,7 @@ nano /etc/php-fpm.d/www.conf
 ```
 
 応答（ Unix user/group of processes を抜粋）<be>
-user = と group = の名前を確認する
+user = と group = の名前を確認する。
 ```
 ; Unix user/group of processes
 ; Note: The user is mandatory. If the group is not set, the default user's group
@@ -883,9 +883,12 @@ user = apache <-ユーザー名
 group = apache <- グループ名
 ```
 
-storage ディレクトリの権限を確認
+インストールした Laravel ディレクトリへ移動します。
 ```
 cd /srv/www/example-app/
+```
+storage ディレクトリの権限を確認。
+```
 ls -la
 ```
 
@@ -894,9 +897,8 @@ ls -la
 drwxrwxr-x  5 ec2-user ec2-user     46 Mar 29 14:48 storage
 ```
 
-storage のユーザーとグループを、 apache に変更する
+storage のユーザーとグループを、 apache に変更する。
 ```
-cd /srv/www/example-app/
 sudo chown -R apache:apache storage/
 ls -la
 ```
