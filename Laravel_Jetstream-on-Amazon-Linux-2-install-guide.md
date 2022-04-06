@@ -32,139 +32,8 @@
 + [Laravel storage ディレクトリの権限変更](#permission_laravel_storage)
 ***
 
-## <a name="install_Laravel"></a>Laravel インストーラー のセットアップ
-
-または、Laravel インストーラーをグローバル Composer 依存関係としてインストールします。
-```
-cd ~
-composer global require laravel/installer
-```
-
-応答
-```
-Changed current directory to /home/ec2-user/.config/composer
-Info from https://repo.packagist.org: #StandWithUkraine
-Using version ^4.2 for laravel/installer
-./composer.json has been created
-Running composer update laravel/installer
-Loading composer repositories with package information
-Updating dependencies
-Lock file operations: 10 installs, 0 updates, 0 removals
-  - Locking ~~~
-Writing lock file
-Installing dependencies from lock file (including require-dev)
-Package operations: 10 installs, 0 updates, 0 removals
-  - Downloading ~~~
-  - Installing ~~~
-6 package suggestions were added by new dependencies, use `composer suggest` to see details.
-Generating autoload files
-8 packages you are using are looking for funding.
-Use the `composer fund` command to find out more!
-```
-
-laravel コマンドをどこからでも呼び出せるように $PATH を .bash_profile へ追記します。
-```
-cd ~
-nano .bash_profile
-```
-
-編集前の .bash_profile は以下の通り
-```
-# .bash_profile
-
-# Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-        . ~/.bashrc
-fi
-
-# User specific environment and startup programs
-
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
-export PATH
-```
-
-PATH= へ以下のパスを追記します。<br>
-```
-$HOME/.config/composer/vendor/bin
-```
-
-必ず " : "を先頭に付けて追記 <br>
-```
-PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.config/composer/vendor/bin
-```
-
-編集した .bash_profile は以下の通り
-```
-# .bash_profile
-
-# Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-        . ~/.bashrc
-fi
-
-# User specific environment and startup programs
-
-PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.config/composer/vendor/bin
-
-export PATH
-```
-
-laravel を試してみます
-```
-laravel
-```
-
-応答
-```
--bash: laravel: command not found
-```
-
-.bash_profile が適用されていないので再読み込みをします
-```
-source .bash_profile
-```
-
-もう一度 laravel を試してみます
-```
-laravel
-```
-
-応答、Laravel Installer がインストールできました。コマンドの一覧も読めます。
-```
-Laravel Installer 4.2.10
-
-Usage:
-  command [options] [arguments]
-
-Options:
-  -h, --help            Display help for the given command. When no command is given display help for the list command
-  -q, --quiet           Do not output any message
-  -V, --version         Display this application version
-      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
-  -n, --no-interaction  Do not ask any interactive question
-  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-Available commands:
-  completion  Dump the shell completion script
-  help        Display help for a command
-  list        List commands
-  new         Create a new Laravel application
-```
-
-## <a name="laravel_command"></a>laravel コマンドリスト
-
-+ laravel アプリケーションの新規作成コマンド
-```
-例：laravel new example-app
-```
-
-```
-laravel new 作成するアプリケーション名
-```
-
 ***
-## <a name="setup_MariaDB_Laravel_db"></a>Laravel で使用するデータベースの作成
+## <a name="setup_MariaDB_Laravel_Jetstream_db"></a>Laravel Jetstream で使用するデータベースの作成
 
 MariaDB へ root でログインします。
 ```
@@ -188,7 +57,7 @@ MariaDB [(none)]>
 ```
 create database "作成するデータベース名" を実行します。
 ```
-create database laravel_db;
+create database laravel_jetstream_db;
 ```
 応答
 ```
@@ -200,21 +69,22 @@ Query OK, 1 row affected (0.000 sec)
 show databases;
 ```
 
-応答、"laravel_db  "が確認できます。
+応答、" laravel_jetstream_db "が確認できます。
 ```
 MariaDB [(none)]> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| laravel_db         |
-| mysql              |
-| performance_schema |
-+--------------------+
-4 rows in set (0.000 sec)
++----------------------+
+| Database             |
++----------------------+
+| information_schema   |
+| laravel_db           |
+| laravel_jetstream_db |
+| mysql                |
+| performance_schema   |
++----------------------+
+5 rows in set (0.003 sec)
 ```
 
-## <a name="setup_MariaDB_Laravel_user"></a>Laravel で使用するユーザーの作成
+## <a name="setup_MariaDB_Laravel_Jetstream_user"></a>Laravel で使用するユーザーの作成
 
 localhost のみ接続できる ユーザーの作成
 ```
@@ -222,7 +92,7 @@ create user 'ユーザー名'@'localhost' identified by 'パスワード';
 ```
 例
 ```
-create user 'Laravel'@'localhost' identified by 'secretpassword';
+create user 'laravel-jetstream'@'localhost' identified by 'secretpassword';
 ```
 何処からでも接続できる ユーザーの作成
 ```
@@ -230,19 +100,19 @@ create user 'ユーザー名' identified by 'パスワード';
 ```
 例
 ```
-create user 'Laravel' identified by 'secretpassword';
+create user 'laravel-jetstream' identified by 'secretpassword';
 ```
 
 ユーザーの情報を確認する
 ```
-select * from mysql.user where user='laravel'\G
+select * from mysql.user where user='laravel-jetstream'\G
 ```
 
 応答、ユーザーが作成されたことが確認出来ます。
 ```
 *************************** 1. row ***************************
                   Host: %
-                  User: laravel
+                  User: laravel-jetstream
 ```
 
 ## <a name="setup_MariaDB_Laravel_user_setting"></a>Laravel で使用するユーザーへデータベース レベルの権限を設定
@@ -253,36 +123,43 @@ grant all on データベース名.* to ユーザー名@接続元;
 
 例：localhost のみ接続できるユーザーの設定
 ```
-grant all on laravel_db.* to Laravel@localhost;
+grant all on laravel_jetstream_db.* to 'laravel-jetstream'@'localhost';
 ```
 例：何処からでも接続できる ユーザーの設定
 ```
-grant all on laravel_db.* to laravel;
+grant all on laravel_jetstream_db.* to 'laravel-jetstream';
 ```
 
 ## <a name="setup_MariaDB_Laravel_user_db"></a>作成したユーザーで権限設定したデータベースを確認
+
+root で MariaDB に入っているので、exit で一度抜けます。
+```
+MariaDB [(none)]> exit
+Bye
+```
+
 作成したユーザで mariadb にログインします。
 ```
-mariadb -u laravel -p
+mariadb -u laravel-jetstream -p
 ```
 ログイン出来たら、権限を設定したデータベースが見えるか確認
 ```
 show databases;
 ```
 
-応答、"laravel_db" が表示されたので設定が出来ています。
+応答、"laravel_jetstream_db" が表示されたので設定が出来ています。
 ```
 MariaDB [(none)]> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| laravel_db         |
-+--------------------+
++----------------------+
+| Database             |
++----------------------+
+| information_schema   |
+| laravel_jetstream_db |
++----------------------+
 2 rows in set (0.000 sec)
 ```
 
-## <a name="setup_laravel_new_project"></a>Laravel プロジェクトの準備
+## <a name="setup_laravel_jetstream_new_project"></a>Laravel Jetstream プロジェクトの準備
 <a name="mkdir_www"></a>/srv/ ディレクトリ内に www ディレクトリを作成する
 ```
 cd /srv/
@@ -306,7 +183,10 @@ ls -la
 drwxr-xr-x  2 ec2-user ec2-user   6 Apr  4 06:24 www
 ```
 
-## <a name="laravel_new_project"></a>Laravel プロジェクトを作成する
+## <a name="laravel_jetstream_new_project"></a>Laravel Jetstream プロジェクトを作成する
+
+>参考：Jetstreamのインストール<br>
+https://jetstream.laravel.com/2.x/installation.html
 
 www ディレクトリへ移動
 ```
@@ -321,8 +201,586 @@ laravel new アプリケーション名
 
 例
 ```
-laravel new example-app
+laravel new laravel-jetstream
 ```
+
+応答、（抜粋 Application ready! Build something amazing.　と表示されたらOK）
+```
+ _                               _
+| |                             | |
+| |     __ _ _ __ __ ___   _____| |
+| |    / _` | '__/ _` \ \ / / _ \ |
+| |___| (_| | | | (_| |\ V /  __/ |
+|______\__,_|_|  \__,_| \_/ \___|_|
+
+Creating a "laravel/laravel" project at "./laravel-jetstream"
+~~~ 
+
+~~~
+Application ready! Build something amazing.
+```
+
+
+作成した laravel プロジェクトディレクトリへ移動する
+```
+cd laravel-jetstream/
+```
+
+storage のユーザーとグループを、webサーバー のユーザー apache に変更する
+```
+cd /srv/www/laravel-jetstream/
+sudo chown -R apache:apache storage/
+ls -la
+```
+
+## .env ファイルの DB_CONNECTION の設定を編集する
+```
+nano .env
+```
+
+変更前
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_jetstream
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+変更後
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=作成したDB名
+DB_USERNAME=作成したユーザー名
+DB_PASSWORD=作成したユーザー名のパスワード
+```
+
+変更例
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_jetstream_db
+DB_USERNAME=laravel-jetstream
+DB_PASSWORD=secretpassword
+```
+
+書き換えたら保存します。
+```
+control + o
+名前を確認して Enter
+File Name to Write: .env
+fileを閉じます
+control + x 
+```
+
+## NGINX へ Laravel プロジェクトの設定準備 を参考にして nginx.conf に 追記してください。
+
+例：nginx.conf
+```
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
+
+# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    keepalive_timeout   65;
+    types_hash_max_size 4096;
+
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
+
+    ### server_name が未設定な場合で有効にしたい時は 他の server {} より先に書きます。
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        error_page 404 /404.html;
+        location = /404.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+    }
+
+    server {
+        listen 80;
+        listen [::]:80;
+
+        ### ドメインネームが決まっていたらドメイン名に書き換える
+        server_name laravel.pgflow.click;
+        ### ドメイン名が決まっていない場合は、"_" と書く
+        #server_name _;
+
+        ### インストールした laravel の public の場所を書く
+        #root /srv/example.com/public;
+        root /srv/www/laravel/public;
+        
+        ### nginx デフォルト設定を読み込む設定を追記（phpに影響します）
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
+    
+        index index.php;
+    
+        charset utf-8;
+    
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+    
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+    
+        error_page 404 /index.php;
+    
+        location ~ \.php$ {
+            ### コメントアウト※nginx デフォルト設定を読み込むため
+            #fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+            #fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            include fastcgi_params;
+        }
+    
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
+    }
+
+    server {
+        listen 80;
+        listen [::]:80;
+
+        ### ドメインネームが決まっていたらドメイン名に書き換える
+        server_name laravel-jetstream.pgflow.click;
+        ### ドメイン名が決まっていない場合は、"_" と書く
+        #server_name _;
+
+        ### インストールした laravel の public の場所を書く
+        #root /srv/example.com/public;
+        root /srv/www/laravel-jetstream/public;
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options "nosniff";
+    
+        index index.php;
+    
+        charset utf-8;
+    
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+    
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+    
+        error_page 404 /index.php;
+    
+        location ~ \.php$ {
+            fastcgi_pass unix:/run/php-fpm/www.sock;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+        }
+    
+        location ~ /\.(?!well-known).* {
+            deny all;
+        }
+    }
+
+# Settings for a TLS enabled server.
+#
+#    server {
+#        listen       443 ssl http2;
+#        listen       [::]:443 ssl http2;
+#        server_name  _;
+#        root         /usr/share/nginx/html;
+#
+#        ssl_certificate "/etc/pki/nginx/server.crt";
+#        ssl_certificate_key "/etc/pki/nginx/private/server.key";
+#        ssl_session_cache shared:SSL:1m;
+#        ssl_session_timeout  10m;
+#        ssl_ciphers PROFILE=SYSTEM;
+#        ssl_prefer_server_ciphers on;
+#
+#        # Load configuration files for the default server block.
+#        include /etc/nginx/default.d/*.conf;
+#
+#        error_page 404 /404.html;
+#            location = /40x.html {
+#        }
+#
+#        error_page 500 502 503 504 /50x.html;
+#            location = /50x.html {
+#        }
+#    }
+
+}
+```
+
+先に進み前に、ブラウザでインストールした Laravel を確認します。<br>
+必ず忘れずに行う<br>
+※ nginx.conf の再読み込み<br>
+※ storage ディレクトリの権限変更
+
+
+## Composerを使用して、Jetstreamを新しいLaravelプロジェクトにインストール
+
+jetstream をインストールするLaravelプロジェクトに移動します
+```
+cd /srv/www/laravel-jetstream/
+```
+
+Composer で Jetstream をインストールする
+```
+composer require laravel/jetstream
+```
+
+応答、（ Publishing complete. と表示されたらOK）
+```
+Info from https://repo.packagist.org: #StandWithUkraine
+Using version ^2.7 for laravel/jetstream
+./composer.json has been updated
+Running composer update laravel/jetstream
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 9 installs, 0 updates, 0 removals
+  - Locking bacon/bacon-qr-code (2.0.7)
+  - Locking dasprid/enum (1.0.3)
+  - Locking jaybizzle/crawler-detect (v1.2.111)
+  - Locking jenssegers/agent (v2.6.4)
+  - Locking laravel/fortify (v1.12.0)
+  - Locking laravel/jetstream (v2.7.2)
+  - Locking mobiledetect/mobiledetectlib (2.8.39)
+  - Locking paragonie/constant_time_encoding (v2.5.0)
+  - Locking pragmarx/google2fa (8.0.0)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 9 installs, 0 updates, 0 removals
+  - Installing dasprid/enum (1.0.3): Extracting archive
+  - Installing bacon/bacon-qr-code (2.0.7): Extracting archive
+  - Installing jaybizzle/crawler-detect (v1.2.111): Extracting archive
+  - Installing paragonie/constant_time_encoding (v2.5.0): Extracting archive
+  - Installing pragmarx/google2fa (8.0.0): Extracting archive
+  - Installing laravel/fortify (v1.12.0): Extracting archive
+  - Installing mobiledetect/mobiledetectlib (2.8.39): Extracting archive
+  - Installing jenssegers/agent (v2.6.4): Extracting archive
+  - Installing laravel/jetstream (v2.7.2): Extracting archive
+1 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+Discovered Package: jenssegers/agent
+Discovered Package: laravel/fortify
+Discovered Package: laravel/jetstream
+Discovered Package: laravel/sail
+Discovered Package: laravel/sanctum
+Discovered Package: laravel/tinker
+Discovered Package: nesbot/carbon
+Discovered Package: nunomaduro/collision
+Discovered Package: spatie/laravel-ignition
+Package manifest generated successfully.
+79 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+No publishable resources for tag [laravel-assets].
+Publishing complete.
+```
+
+## ＃Livewire を使用してJetstreamをインストールする<br>
+※ Livewire か Vue.js を選択することも出来ます。<br>
+※ --teams オプションの詳細は > https://jetstream.laravel.com/2.x/features/teams.html
+
+Livewire を使用して、teams を利用する場合のインストール
+```
+php artisan jetstream:install livewire --teams
+```
+
+応答（Livewire scaffolding installed successfully. と表示されたらOK）
+```
+Migration created successfully.
+./composer.json has been updated
+Running composer update livewire/livewire
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 1 install, 0 updates, 0 removals
+  - Locking livewire/livewire (v2.10.4)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 1 install, 0 updates, 0 removals
+  - Downloading livewire/livewire (v2.10.4)
+  - Installing livewire/livewire (v2.10.4): Extracting archive
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+Discovered Package: jenssegers/agent
+Discovered Package: laravel/fortify
+Discovered Package: laravel/jetstream
+Discovered Package: laravel/sail
+Discovered Package: laravel/sanctum
+Discovered Package: laravel/tinker
+Discovered Package: livewire/livewire
+Discovered Package: nesbot/carbon
+Discovered Package: nunomaduro/collision
+Discovered Package: spatie/laravel-ignition
+Package manifest generated successfully.
+80 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+> @php artisan vendor:publish --tag=laravel-assets --ansi --force
+No publishable resources for tag [laravel-assets].
+Publishing complete.
+Copied Directory [/vendor/laravel/sanctum/database/migrations] To [/database/migrations]
+Copied File [/vendor/laravel/sanctum/config/sanctum.php] To [/config/sanctum.php]
+Publishing complete.
+
+Livewire scaffolding installed successfully.
+Please execute "npm install && npm run dev" to build your assets.
+```
+
+
+## NPM依存関係のインストール
+
+＃
+インストールの完了
+
+Jetstreamをインストールした後、NPM依存関係をインストールして構築し、データベースを移行する必要があります。
+```
+npm install
+```
+
+応答、npm コマンドが無い
+```
+-bash: npm: command not found
+```
+
+
+>https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+
+
+>https://docs.aws.amazon.com/ja_jp/ja_jp/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
+
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+
+```
+. ~/.nvm/nvm.sh
+```
+
+```
+nvm install node
+```
+
+応答
+```
+Downloading and installing node v17.8.0...
+Downloading https://nodejs.org/dist/v17.8.0/node-v17.8.0-linux-x64.tar.xz...
+############################################################################################### 100.0%
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v17.8.0 (npm v8.5.5)
+Creating default alias: default -> node (-> v17.8.0)
+```
+
+nodejs のバージョンを確認
+```
+node -v
+```
+
+応答
+```
+v17.8.0
+```
+
+npm のバージョンを確認
+```
+npm -v
+```
+
+応答
+```
+8.5.5
+```
+
+## npm のインストールが完了したので、再度 npm install を実行
+laravel-jetstream のディレクトリへ移動
+```
+cd /srv/www/laravel-jetstream/
+```
+**npm install を実行**
+```
+npm install
+```
+
+応答
+```
+npm WARN deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+
+added 772 packages, and audited 773 packages in 48s
+
+72 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm notice
+npm notice New minor version of npm available! 8.5.5 -> 8.6.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.6.0
+npm notice Run npm install -g npm@8.6.0 to update!
+npm notice
+```
+
+**npm run dev を実行**
+```
+npm run dev
+```
+
+応答（ webpack compiled successfully 表示されたらOK ）
+```
+> dev
+> npm run development
+
+> development
+> mix
+
+● Mix █████████████████████████ emitting (95%)
+ emit
+
+● Mix █████████████████████████ done (99%) plugins
+ WebpackBar:done
+
+✔ Mix
+  Compiled successfully in 2.92s
+
+   Laravel Mix v6.0.43
+
+✔ Compiled Successfully in 2893ms
+┌─────────────────────────────────────────────────────────────────────────────────────────┬──────────┐
+│                                                                                    File │ Size     │
+├─────────────────────────────────────────────────────────────────────────────────────────┼──────────┤
+│                                                                              /js/app.js │ 694 KiB  │
+│                                                                             css/app.css │ 47.4 KiB │
+└─────────────────────────────────────────────────────────────────────────────────────────┴──────────┘
+webpack compiled successfully
+```
+
+**php artisan migrate**
+```
+php artisan migrate
+```
+
+応答
+```
+
+   UnexpectedValueException
+
+  The stream or file "/srv/www/laravel-jetstream/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied
+The exception occurred while attempting to log: The stream or file "/srv/www/laravel-jetstream/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied
+The exception occurred while attempting to log: SQLSTATE[HY000] [1045] Access denied for user 'laravel-jetstream'@'localhost' (using password: YES) (SQL: select * from information_schema.tables where table_schema = laravel_jetstream_db and table_name = migrations and table_type = 'BASE TABLE')
+Context: {"exception":{"errorInfo":["HY000",1045,"Access denied for user 'laravel-jetstream'@'localhost' (using password: YES)"]}}
+Context: {"exception":{}}
+
+  at vendor/monolog/monolog/src/Monolog/Handler/StreamHandler.php:146
+    142▕             restore_error_handler();
+    143▕             if (!is_resource($stream)) {
+    144▕                 $this->stream = null;
+    145▕
+  ➜ 146▕                 throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not be opened in append mode: '.$this->errorMessage, $url) . Utils::getRecordMessageForException($record));
+    147▕             }
+    148▕             stream_set_chunk_size($stream, $this->streamChunkSize);
+    149▕             $this->stream = $stream;
+    150▕         }
+
+      +10 vendor frames
+  11  [internal]:0
+      Illuminate\Foundation\Bootstrap\HandleExceptions::Illuminate\Foundation\Bootstrap\{closure}(Object(UnexpectedValueException))
+```
+
+
+
+再実行 php artisan migrate
+```
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (12.98ms)
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table (11.73ms)
+Migrating: 2014_10_12_200000_add_two_factor_columns_to_users_table
+Migrated:  2014_10_12_200000_add_two_factor_columns_to_users_table (3.56ms)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (11.22ms)
+Migrating: 2019_12_14_000001_create_personal_access_tokens_table
+Migrated:  2019_12_14_000001_create_personal_access_tokens_table (18.02ms)
+Migrating: 2020_05_21_100000_create_teams_table
+Migrated:  2020_05_21_100000_create_teams_table (12.52ms)
+Migrating: 2020_05_21_200000_create_team_user_table
+Migrated:  2020_05_21_200000_create_team_user_table (12.41ms)
+Migrating: 2020_05_21_300000_create_team_invitations_table
+Migrated:  2020_05_21_300000_create_team_invitations_table (36.01ms)
+Migrating: 2022_04_06_065254_create_sessions_table
+Migrated:  2022_04_06_065254_create_sessions_table (28.16ms)
+```
+
+storage のpermission を確認
+
+```
+
+storage の権限をec2-userに戻す
+sudo chown -R ec2-user:ec2-user storage/
+ls -la
+
+
+
+storage の権限をapacheに変更する
+sudo chown -R apache:apache storage/
+ls -la
+
+
+
+
+データベースにユーザーを追加する
+```
+```
+npm run dev
+php artisan migrate
+```
+
+
 
 実行するとインストールのエラー ext-dom エクステンションが必要だとする内容が表示されました、次の手順でエラーを解決します。
 ```
