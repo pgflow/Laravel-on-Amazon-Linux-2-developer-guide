@@ -644,7 +644,9 @@ server {
     error_page 404 /index.php;
 ```
 
-**fastcgi_pass と fastcgi_param の補足説明**
+**fastcgi_pass と fastcgi_param を書き換える場合の補足説明**<br>
+※ Load configuration files for the default server block. を書き足す場合は
+<a name="">次へ進んでください。</a>
 
 fastcgi_pass を調べるため、php-fpm.conf を開いて確認します。
 ```
@@ -708,7 +710,7 @@ $document_root$fastcgi_script_name;
 }
 ```
 
-**※ nginx デフォルト設定を読み込む場合は、fastcgi_pass と fastcgi_param をコメントアウトする。**
+**<a name="nginx_default"></a>※ nginx デフォルト設定を読み込む場合は、fastcgi_pass と fastcgi_param をコメントアウトする。**
 ```
 #server { 内に以下を追記しておく。
 # Load configuration files for the default server block.
