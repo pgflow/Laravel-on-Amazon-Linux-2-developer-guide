@@ -504,6 +504,7 @@ Application ready! Build something amazing.
 laravel プロジェクトが正常に作成されました。
 
 ***
+
 ## <a neme="nginxconf"></a>NGINX へ Laravel プロジェクトの設定準備
 
 既存の nginx.conf ファイルをコピーして Laravel に必要な設定を書き足して、書き換えた、nginx.conf に置き換えます。
@@ -569,7 +570,6 @@ get nginx.conf C:\Users\username\Downloads
 上記コマンドを Enter すると<br>
 自分のPCのダウンロードフォルダに nginx.conf が保存されました。
 ![nginx.conf](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/nginx_conf_download.png)
-
 
 ## <a neme="edit_nginxconf"></a>nginx.conf を編集 Laravel server の設定を書き足す
 
