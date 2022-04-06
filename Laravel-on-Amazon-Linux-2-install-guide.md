@@ -863,19 +863,38 @@ The stream or file "/srv/www/example-app/storage/logs/laravel.log" could not be 
 ```
 
 ## <a neme="permission_laravel_storage"></a>Laravel storage ディレクトリの権限変更
-storage 以下のファイルに webサーバー apache から書き込みが出来ないためエラーが出ている、現在の権限を確認
 
+storage 以下のファイルに webサーバーで実行している PHP（php-fpm） から書き込みが出来ないためエラーが出ている、現在の php-fpm 実行ユーザーとグループを確認します。
+
+php-fpm の www.conf ファイルを確認します。
+```
+nano /etc/php-fpm.d/www.conf
+```
+
+応答（ Unix user/group of processes を抜粋）<be>
+user = と group = の名前を確認する
+```
+; Unix user/group of processes
+; Note: The user is mandatory. If the group is not set, the default user's group
+;       will be used.
+; RPM: apache user chosen to provide access to the same directories as httpd
+user = apache <-ユーザー名
+; RPM: Keep a group allowed to write in log dir.
+group = apache <- グループ名
+```
+
+storage ディレクトリの権限を確認
 ```
 cd /srv/www/example-app/
 ls -la
 ```
 
-応答 storage ディレクトリのユーザーとグループが webサーバー apache ではなく、ec2-user になっている。
+応答 storage ディレクトリのユーザーとグループが apache ではなく、ec2-user になっている。
 ```
 drwxrwxr-x  5 ec2-user ec2-user     46 Mar 29 14:48 storage
 ```
 
-storage のユーザーとグループを、webサーバー のユーザー apache に変更する
+storage のユーザーとグループを、 apache に変更する
 ```
 cd /srv/www/example-app/
 sudo chown -R apache:apache storage/
