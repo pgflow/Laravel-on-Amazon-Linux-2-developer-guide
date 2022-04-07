@@ -17,20 +17,17 @@
    + [Laravel Jetstream で使用するユーザーへ権限を付与](#setup_MariaDB_Laravel_Jetstream_user_setting)
     + [作成したユーザーで権限設定したデータベースを確認](#setup_MariaDB_Laravel_Jetstream_user_db)
 ***
-
-
-
-
-+ [NGINX へ Laravel プロジェクトの設定準備](#nginxconf)
-  + [sftp 接続して nginx.conf をダウンロード](#sftp_get_nginxconf)
-  + [nginx.conf を編集 Laravel server の設定を書き足す](#edit_nginxconf)
-  + [sftp 接続して nginx.conf をアップロード](#sftp_put_nginxconf)
-  + [nginx.conf のユーザーと権限の変更](#permission_nginxconf)
-***
-+ [Laravel storage ディレクトリの権限変更](#permission_laravel_storage)
++ [Laravel Jetstream プロジェクトの準備](#setup_laravel_jetstream_new_project)
+  + [ディレクトリを作成する](#mkdir_www)
+  + [Laravel Jetstream プロジェクトを作成する](#laravel_jetstream_new_project)
+  + [.env ファイルへ DB_ と MAIL_ の設定](#edit_env_db_mail)
+  + [nginx.conf を編集](#edit_nginxconf)
+  + [Composer を使用して、Jetstream を新しい Laravel プロジェクトにインストール](#laravel_jetstream_install_project)
+  + [Livewire を使用して Jetstream のインストールを完了する](#laravel_jetstream_install_livewire_project)
+  + [NPM 依存関係のインストール](#npm_install)
+  + [dashboard へ移動できない MbstringPHP 拡張機能のインストール](#dashboard_error_mbstring)
 ***
 
-***
 ## <a name="setup_MariaDB_Laravel_Jetstream_db"></a>Laravel Jetstream で使用するデータベースの作成
 
 MariaDB へ root でログインします。
@@ -82,7 +79,7 @@ MariaDB [(none)]> show databases;
 5 rows in set (0.003 sec)
 ```
 
-## <a name="setup_MariaDB_Laravel_Jetstream_user"></a>Laravel で使用するユーザーの作成
+## <a name="setup_MariaDB_Laravel_Jetstream_user"></a>Laravel Jetstream で使用するユーザーの作成
 
 localhost のみ接続できる ユーザーの作成
 ```
@@ -113,7 +110,7 @@ select * from mysql.user where user='laravel-jetstream'\G
                   User: laravel-jetstream
 ```
 
-## <a name="setup_MariaDB_Laravel_user_setting"></a>Laravel で使用するユーザーへデータベース レベルの権限を設定
+## <a name="setup_MariaDB_Laravel_user_setting"></a>Laravel Jetstream で使用するユーザーへデータベース レベルの権限を設定
 grant all で全ての権限が対象のデータベースに対して指定したユーザーに設定されます。
 ```
 grant all on データベース名.* to ユーザー名@接続元;
@@ -157,6 +154,7 @@ MariaDB [(none)]> show databases;
 2 rows in set (0.000 sec)
 ```
 
+***
 ## <a name="setup_laravel_jetstream_new_project"></a>Laravel Jetstream プロジェクトの準備
 <a name="mkdir_www"></a>/srv/ ディレクトリ内に www ディレクトリを作成する
 ```
@@ -218,7 +216,7 @@ Creating a "laravel/laravel" project at "./laravel-jetstream"
 Application ready! Build something amazing.
 ```
 
-## <a name="edit_env_db"></a>.env ファイルへ DB_CONNECTION の設定
+## <a name="edit_env_db_mail"></a>.env ファイルへ DB_ と MAIL_ の設定
 作成した laravel プロジェクトディレクトリへ移動する
 ```
 cd laravel-jetstream/
@@ -229,7 +227,9 @@ cd laravel-jetstream/
 nano .env
 ```
 
-変更前
+**> DB_**
+
+DB_CONNECTION 変更前
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -239,7 +239,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-変更後
+DB_CONNECTION 変更後
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -249,7 +249,7 @@ DB_USERNAME=作成したユーザー名
 DB_PASSWORD=作成したユーザー名のパスワード
 ```
 
-変更例
+DB_CONNECTION 変更例
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -257,6 +257,44 @@ DB_PORT=3306
 DB_DATABASE=laravel_jetstream_db
 DB_USERNAME=laravel-jetstream
 DB_PASSWORD=secretpassword
+```
+
+**> MAIL_**
+
+MAIL_MAILER 変更前
+```
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+MAIL_MAILER 変更後
+```
+MAIL_MAILER=smtp
+MAIL_HOST=SMTPサーバーアドレス
+MAIL_PORT=SMTPサーバー指定ポート番号
+MAIL_USERNAME=ユーザー名
+MAIL_PASSWORD=パスワード
+MAIL_ENCRYPTION=指定の暗号方法
+MAIL_FROM_ADDRESS="送信元になるメールアドレス"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+MAIL_MAILER 変更例
+```
+MAIL_MAILER=smtp
+MAIL_HOST=email-smtp.com
+MAIL_PORT=25
+MAIL_USERNAME=laravel-jetstream
+MAIL_PASSWORD=secretpassword
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="laravel-jetstream@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 書き換えたら保存します。
@@ -526,24 +564,6 @@ Livewire scaffolding installed successfully.
 Please execute "npm install && npm run dev" to build your assets.
 ```
 
-+ [Laravel Jetstream プロジェクトの準備](#setup_laravel_jetstream_new_project)
-  + [ディレクトリを作成する](#mkdir_www)
-  + [Laravel Jetstream プロジェクトを作成する](#laravel_jetstream_new_project)
-  + [.env ファイルへ DB_CONNECTION の設定](#edit_env_db)
-  + [nginx.conf を編集](#edit_nginxconf)
-  + [Composer を使用して、Jetstream を新しい Laravel プロジェクトにインストール](#laravel_jetstream_install_project)
-  + [Livewire を使用して Jetstream のインストールを完了する](#laravel_jetstream_install_livewire_project)
-  + [NPM 依存関係のインストール](#npm_install)
-
-
-
-   + [インストールのエラー解決 ext-dom extension のインストール](#laravel_Jetstream_new_error)
-   + [Laravel Jetstream プロジェクトを再度作成する](#laravel_Jetstream_new_project_re)
-
-   <a name="laravel_jetstream_new_project"></a>
-***
-
-***
 ## <a name="npm_install"></a>NPM 依存関係のインストール
 Jetstreamをインストールした後、NPM依存関係をインストールして構築し、データベースを移行する必要があります。
 
@@ -712,6 +732,7 @@ Publishing complete.
 ```
 
 **> 次に、にあるSVGをカスタマイズする必要があります**
+
 ```
 resources/views/vendor/jetstream/components/application-logo.blade.php
 resources/views/vendor/jetstream/components/authentication-card-logo.blade.php
@@ -723,25 +744,22 @@ resources/views/vendor/jetstream/components/application-mark.blade.php
 npm run dev
 ```
 
-## storage のユーザーとグループを、webサーバー のユーザー apache に変更する
+**> storage のユーザーとグループを、webサーバー のユーザー apache に変更する**
 ```
 cd /srv/www/laravel-jetstream/
 sudo chown -R apache:apache storage/
 ls -la
 ```
 
-## インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel Jetstream が動いているのを確認する。
+**> インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel Jetstream が動いているのを確認する。**
 
 右上の"Register"からユーザー登録すると、dashboard ページへ移動します。
 
 ![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome_to_your_Jetstream_application.png)
 
+## <a name="dashboard_error_mbstring"></a>dashboard へ移動できない MbstringPHP 拡張機能のインストール
 
-
-
-## dashboard へ移動できない
-
-ブラウザに表示されるError
+ブラウザに表示される Error
 ```
 Maximum execution time of 30 seconds exceeded
 ```
