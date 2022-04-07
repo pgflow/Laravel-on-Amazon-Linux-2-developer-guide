@@ -710,6 +710,14 @@ ls -la
 ## インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel Jetstream が動いているのを確認する。
 ![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Laravel_beginning.png)
 
+
+ダッシュボードで移動できない
+
+原因
+
+対処（関係ない）
+.env へメールサーバーの設定
+
 ***
 + [pageTop](#pageTop)
 + [README](README.md)
