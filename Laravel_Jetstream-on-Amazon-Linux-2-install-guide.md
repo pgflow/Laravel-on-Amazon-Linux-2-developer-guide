@@ -23,6 +23,9 @@
    + [インストールのエラー解決 ext-dom extension のインストール](#laravel_Jetstream_new_error)
    + [Laravel Jetstream プロジェクトを再度作成する](#laravel_Jetstream_new_project_re)
 ***
+
+
+
 + [NGINX へ Laravel プロジェクトの設定準備](#nginxconf)
   + [sftp 接続して nginx.conf をダウンロード](#sftp_get_nginxconf)
   + [nginx.conf を編集 Laravel server の設定を書き足す](#edit_nginxconf)
@@ -226,13 +229,6 @@ Application ready! Build something amazing.
 cd laravel-jetstream/
 ```
 
-storage のユーザーとグループを、webサーバー のユーザー apache に変更する
-```
-cd /srv/www/laravel-jetstream/
-sudo chown -R apache:apache storage/
-ls -la
-```
-
 ## .env ファイルの DB_CONNECTION の設定を編集する
 ```
 nano .env
@@ -270,14 +266,18 @@ DB_PASSWORD=secretpassword
 
 書き換えたら保存します。
 ```
+・変更を保存
 control + o
-名前を確認して Enter
+
+・File 名前を確認して Enter
 File Name to Write: .env
-fileを閉じます
+
+・File を閉じます
 control + x 
 ```
 
-## NGINX へ Laravel プロジェクトの設定準備 を参考にして nginx.conf に 追記してください。
+## nginx.conf を編集
+[NGINX へ Laravel プロジェクトの設定準備](Laravel-on-Amazon-Linux-2-install-guide.md#a-name"nginxconf"anginx-へ-laravel-プロジェクトの設定準備)を参考にして nginx.conf に 追記してください。
 
 例：nginx.conf
 ```
@@ -319,77 +319,34 @@ http {
     include /etc/nginx/conf.d/*.conf;
 
     ### server_name が未設定な場合で有効にしたい時は 他の server {} より先に書きます。
-    server {
-        listen       80;
-        listen       [::]:80;
-        server_name  _;
-        root         /usr/share/nginx/html;
-
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
-
-        error_page 404 /404.html;
-        location = /404.html {
-        }
-
-        error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-        }
-    }
-
-    server {
-        listen 80;
-        listen [::]:80;
-
-        ### ドメインネームが決まっていたらドメイン名に書き換える
-        server_name laravel.pgflow.click;
-        ### ドメイン名が決まっていない場合は、"_" と書く
-        #server_name _;
-
-        ### インストールした laravel の public の場所を書く
-        #root /srv/example.com/public;
-        root /srv/www/laravel/public;
-        
-        ### nginx デフォルト設定を読み込む設定を追記（phpに影響します）
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
-
-        add_header X-Frame-Options "SAMEORIGIN";
-        add_header X-Content-Type-Options "nosniff";
     
-        index index.php;
-    
-        charset utf-8;
-    
-        location / {
-            try_files $uri $uri/ /index.php?$query_string;
-        }
-    
-        location = /favicon.ico { access_log off; log_not_found off; }
-        location = /robots.txt  { access_log off; log_not_found off; }
-    
-        error_page 404 /index.php;
-    
-        location ~ \.php$ {
-            ### コメントアウト※nginx デフォルト設定を読み込むため
-            #fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
-            #fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-            include fastcgi_params;
-        }
-    
-        location ~ /\.(?!well-known).* {
-            deny all;
-        }
-    }
+#    server {
+#        listen       80;
+#        listen       [::]:80;
+#        server_name  _;
+#        root         /usr/share/nginx/html;
+#
+#        # Load configuration files for the default server block.
+#        include /etc/nginx/default.d/*.conf;
+#
+#        error_page 404 /404.html;
+#        location = /404.html {
+#        }
+#
+#        error_page 500 502 503 504 /50x.html;
+#        location = /50x.html {
+#        }
+#    }
+
 
     server {
         listen 80;
         listen [::]:80;
 
         ### ドメインネームが決まっていたらドメイン名に書き換える
-        server_name laravel-jetstream.pgflow.click;
+        #server_name example.com;
         ### ドメイン名が決まっていない場合は、"_" と書く
-        #server_name _;
+        server_name _;
 
         ### インストールした laravel の public の場所を書く
         #root /srv/example.com/public;
@@ -706,35 +663,6 @@ php artisan migrate
 
 応答
 ```
-
-   UnexpectedValueException
-
-  The stream or file "/srv/www/laravel-jetstream/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied
-The exception occurred while attempting to log: The stream or file "/srv/www/laravel-jetstream/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied
-The exception occurred while attempting to log: SQLSTATE[HY000] [1045] Access denied for user 'laravel-jetstream'@'localhost' (using password: YES) (SQL: select * from information_schema.tables where table_schema = laravel_jetstream_db and table_name = migrations and table_type = 'BASE TABLE')
-Context: {"exception":{"errorInfo":["HY000",1045,"Access denied for user 'laravel-jetstream'@'localhost' (using password: YES)"]}}
-Context: {"exception":{}}
-
-  at vendor/monolog/monolog/src/Monolog/Handler/StreamHandler.php:146
-    142▕             restore_error_handler();
-    143▕             if (!is_resource($stream)) {
-    144▕                 $this->stream = null;
-    145▕
-  ➜ 146▕                 throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not be opened in append mode: '.$this->errorMessage, $url) . Utils::getRecordMessageForException($record));
-    147▕             }
-    148▕             stream_set_chunk_size($stream, $this->streamChunkSize);
-    149▕             $this->stream = $stream;
-    150▕         }
-
-      +10 vendor frames
-  11  [internal]:0
-      Illuminate\Foundation\Bootstrap\HandleExceptions::Illuminate\Foundation\Bootstrap\{closure}(Object(UnexpectedValueException))
-```
-
-
-
-再実行 php artisan migrate
-```
 Migration table created successfully.
 Migrating: 2014_10_12_000000_create_users_table
 Migrated:  2014_10_12_000000_create_users_table (12.98ms)
@@ -756,20 +684,22 @@ Migrating: 2022_04_06_065254_create_sessions_table
 Migrated:  2022_04_06_065254_create_sessions_table (28.16ms)
 ```
 
+>不要
 storage のpermission を確認
-
-```
-
 storage の権限をec2-userに戻す
 sudo chown -R ec2-user:ec2-user storage/
 ls -la
-
-
-
 storage の権限をapacheに変更する
 sudo chown -R apache:apache storage/
 ls -la
+>不要
 
+storage のユーザーとグループを、webサーバー のユーザー apache に変更する
+```
+cd /srv/www/laravel-jetstream/
+sudo chown -R apache:apache storage/
+ls -la
+```
 
 
 
