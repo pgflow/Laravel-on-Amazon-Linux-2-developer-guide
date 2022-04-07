@@ -416,7 +416,6 @@ composer require laravel/jetstream
 
 応答、（ Publishing complete. と表示されたらOK）
 ```
-Info from https://repo.packagist.org: #StandWithUkraine
 Using version ^2.7 for laravel/jetstream
 ./composer.json has been updated
 Running composer update laravel/jetstream
@@ -470,10 +469,22 @@ Publishing complete.
 >※ --teams オプションの詳細は公式サイトで確認<br>
 > https://jetstream.laravel.com/2.x/features/teams.html
 
-Livewire を使用して、teams を利用する場合のインストール
+Livewire を使用するオプションでインストール
 ```
-php artisan jetstream:install livewire --teams
+php artisan jetstream:install livewire
 ```
+>**注意**<br>
+>--teams オプションをつけて install しても、<br>
+>```
+>php artisan jetstream:install livewire --teams
+>```
+>
+>ユーザー登録後、dashboard ページで以下のエラーが出ます。<br>
+>```
+>ParseError<br>
+>syntax error, unexpected token "@", expecting variable or "{" or "$"
+>```
+> 2022/04/07 installにて
 
 応答（Livewire scaffolding installed successfully. と表示されたらOK）
 ```
@@ -487,7 +498,6 @@ Lock file operations: 1 install, 0 updates, 0 removals
 Writing lock file
 Installing dependencies from lock file (including require-dev)
 Package operations: 1 install, 0 updates, 0 removals
-  - Downloading livewire/livewire (v2.10.4)
   - Installing livewire/livewire (v2.10.4): Extracting archive
 Generating optimized autoload files
 > Illuminate\Foundation\ComposerScripts::postAutoloadDump
@@ -516,7 +526,6 @@ Livewire scaffolding installed successfully.
 Please execute "npm install && npm run dev" to build your assets.
 ```
 
-
 + [Laravel Jetstream プロジェクトの準備](#setup_laravel_jetstream_new_project)
   + [ディレクトリを作成する](#mkdir_www)
   + [Laravel Jetstream プロジェクトを作成する](#laravel_jetstream_new_project)
@@ -534,10 +543,15 @@ Please execute "npm install && npm run dev" to build your assets.
    <a name="laravel_jetstream_new_project"></a>
 ***
 
+***
 ## <a name="npm_install"></a>NPM 依存関係のインストール
 Jetstreamをインストールした後、NPM依存関係をインストールして構築し、データベースを移行する必要があります。
+
+※以下の３つを実行します
 ```
-php artisan vendor:publish --tag=jetstream-views
+npm install
+npm run dev
+php artisan migrate
 ```
 
 npm をインストールします。
@@ -557,7 +571,7 @@ https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating<br>
 チュートリアル: Amazon EC2 インスタンスでの Node.js のセットアップ<br>
 https://docs.aws.amazon.com/ja_jp/ja_jp/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
 
-curl でインストールを進めます
+curl で nvm（パッケージ管理） のインストールを進めます
 ```
 cd ~
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -605,7 +619,8 @@ npm -v
 ```
 npm のインストールが完了しました。
 
-## npm install を実行
+**> npm install を実行**
+
 laravel-jetstream のディレクトリへ移動
 ```
 cd /srv/www/laravel-jetstream/
@@ -620,20 +635,15 @@ npm install
 ```
 npm WARN deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
 
-added 772 packages, and audited 773 packages in 48s
+added 770 packages, and audited 771 packages in 28s
 
 72 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
-npm notice
-npm notice New minor version of npm available! 8.5.5 -> 8.6.0
-npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.6.0
-npm notice Run npm install -g npm@8.6.0 to update!
-npm notice
 ```
 
-## npm run dev を実行
+**> npm run dev を実行**
 ```
 npm run dev
 ```
@@ -657,7 +667,7 @@ npm run dev
 
    Laravel Mix v6.0.43
 
-✔ Compiled Successfully in 2893ms
+✔ Compiled Successfully in 2886ms
 ┌─────────────────────────────────────────────────────────────────────────────────────────┬──────────┐
 │                                                                                    File │ Size     │
 ├─────────────────────────────────────────────────────────────────────────────────────────┼──────────┤
@@ -667,7 +677,7 @@ npm run dev
 webpack compiled successfully
 ```
 
-## php artisan migrate を実行
+**> php artisan migrate を実行**
 ```
 php artisan migrate
 ```
@@ -676,28 +686,41 @@ php artisan migrate
 ```
 Migration table created successfully.
 Migrating: 2014_10_12_000000_create_users_table
-Migrated:  2014_10_12_000000_create_users_table (12.98ms)
+Migrated:  2014_10_12_000000_create_users_table (13.87ms)
 Migrating: 2014_10_12_100000_create_password_resets_table
-Migrated:  2014_10_12_100000_create_password_resets_table (11.73ms)
+Migrated:  2014_10_12_100000_create_password_resets_table (15.26ms)
 Migrating: 2014_10_12_200000_add_two_factor_columns_to_users_table
-Migrated:  2014_10_12_200000_add_two_factor_columns_to_users_table (3.56ms)
+Migrated:  2014_10_12_200000_add_two_factor_columns_to_users_table (3.65ms)
 Migrating: 2019_08_19_000000_create_failed_jobs_table
-Migrated:  2019_08_19_000000_create_failed_jobs_table (11.22ms)
+Migrated:  2019_08_19_000000_create_failed_jobs_table (15.37ms)
 Migrating: 2019_12_14_000001_create_personal_access_tokens_table
-Migrated:  2019_12_14_000001_create_personal_access_tokens_table (18.02ms)
-Migrating: 2020_05_21_100000_create_teams_table
-Migrated:  2020_05_21_100000_create_teams_table (12.52ms)
-Migrating: 2020_05_21_200000_create_team_user_table
-Migrated:  2020_05_21_200000_create_team_user_table (12.41ms)
-Migrating: 2020_05_21_300000_create_team_invitations_table
-Migrated:  2020_05_21_300000_create_team_invitations_table (36.01ms)
-Migrating: 2022_04_06_065254_create_sessions_table
-Migrated:  2022_04_06_065254_create_sessions_table (28.16ms)
+Migrated:  2019_12_14_000001_create_personal_access_tokens_table (23.28ms)
+Migrating: 2022_04_07_054735_create_sessions_table
+Migrated:  2022_04_07_054735_create_sessions_table (35.54ms)
 ```
 
-## php artisan vendor:publish --tag=jetstream-views
+**> Livewireスタックを使用している場合は、最初にLivewireスタックのBladeコンポーネントを公開する必要があります。**
+
 ```
 php artisan vendor:publish --tag=jetstream-views
+```
+
+応答
+```
+Copied Directory [/vendor/laravel/jetstream/resources/views] To [/resources/views/vendor/jetstream]
+Publishing complete.
+```
+
+**> 次に、にあるSVGをカスタマイズする必要があります**
+```
+resources/views/vendor/jetstream/components/application-logo.blade.php
+resources/views/vendor/jetstream/components/authentication-card-logo.blade.php
+resources/views/vendor/jetstream/components/application-mark.blade.php
+```
+
+**> これらのコンポーネントをカスタマイズした後、アセットを再構築する必要があります。 **
+```
+npm run dev
 ```
 
 ## storage のユーザーとグループを、webサーバー のユーザー apache に変更する
@@ -708,15 +731,166 @@ ls -la
 ```
 
 ## インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel Jetstream が動いているのを確認する。
-![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Laravel_beginning.png)
+
+右上の"Register"からユーザー登録すると、dashboard ページへ移動します。
+
+![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome_to_your_Jetstream_application.png)
 
 
-ダッシュボードで移動できない
 
-原因
 
-対処（関係ない）
-.env へメールサーバーの設定
+## dashboard へ移動できない
+
+ブラウザに表示されるError
+```
+Maximum execution time of 30 seconds exceeded
+```
+
+対処方法の参考
+
+>サーバー要件<br>
+>Laravelフレームワークにはいくつかのシステム要件があります。 <br>
+>Webサーバーに次の最小PHPバージョンと拡張機能があることを確認する必要があります。 <br>
+>https://laravel.com/docs/9.x/deployment#server-requirements
+>
+>```
+>PHP> = 8.0
+>BCMathPHP 拡張機能
+>CtypePHP 拡張機能
+>cURLPHP 拡張機能
+>DOMPHP 拡張機能
+>FileinfoPHP 拡張機能
+>JSONPHP 拡張機能
+>MbstringPHP 拡張機能
+>OpenSSLPHP 拡張機能
+>PCREPHP 拡張
+>PDOPHP 拡張機能
+>TokenizerPHP 拡張機能
+>XMLPHP 拡張機能
+>```
+>以上のPHP拡張機能がインストールされている必要があります。
+>
+
+インストールされている php 機能拡張を確認します。
+```
+php -m
+```
+
+
+応答
+```
+bz2
+calendar
+Core
+ctype
+curl
+date
+dom
+exif
+fileinfo
+filter
+ftp
+gettext
+hash
+iconv
+json
+libxml
+mysqli
+mysqlnd
+openssl
+pcntl
+pcre
+PDO
+pdo_mysql
+pdo_sqlite
+Phar
+readline
+Reflection
+session
+SimpleXML
+sockets
+SPL
+sqlite3
+standard
+tokenizer
+xml
+xmlreader
+xmlwriter
+xsl
+zip
+zlib
+```
+
+MbstringPHP 拡張機能 がインストールされていないので、install します。
+```
+sudo yum -y install php-mbstring
+```
+
+応答（ Complete! が表示されたらOK）
+```
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                     | 3.7 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package php-mbstring.x86_64 0:8.0.16-1.amzn2 will be installed
+--> Processing Dependency: libonig.so.2()(64bit) for package: php-mbstring-8.0.16-1.amzn2.x86_64
+--> Running transaction check
+---> Package oniguruma.x86_64 0:5.9.6-1.amzn2.0.4 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+======================================================================================================
+ Package               Arch            Version                       Repository                  Size
+======================================================================================================
+Installing:
+ php-mbstring          x86_64          8.0.16-1.amzn2                amzn2extra-php8.0          473 k
+Installing for dependencies:
+ oniguruma             x86_64          5.9.6-1.amzn2.0.4             amzn2-core                 127 k
+
+Transaction Summary
+======================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 600 k
+Installed size: 2.5 M
+Downloading packages:
+(1/2): oniguruma-5.9.6-1.amzn2.0.4.x86_64.rpm                                  | 127 kB  00:00:00
+(2/2): php-mbstring-8.0.16-1.amzn2.x86_64.rpm                                  | 473 kB  00:00:00
+------------------------------------------------------------------------------------------------------
+Total                                                                 3.0 MB/s | 600 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : oniguruma-5.9.6-1.amzn2.0.4.x86_64                                                 1/2
+  Installing : php-mbstring-8.0.16-1.amzn2.x86_64                                                 2/2
+  Verifying  : php-mbstring-8.0.16-1.amzn2.x86_64                                                 1/2
+  Verifying  : oniguruma-5.9.6-1.amzn2.0.4.x86_64                                                 2/2
+
+Installed:
+  php-mbstring.x86_64 0:8.0.16-1.amzn2
+
+Dependency Installed:
+  oniguruma.x86_64 0:5.9.6-1.amzn2.0.4
+
+Complete!
+```
+
+php-fpm nginx service を再起動します
+
++ php-fpm サービス再起動コマンド
+```
+sudo systemctl restart php-fpm
+```
+
++ NGINX サービス再起動コマンド
+```
+sudo systemctl restart nginx
+```
+
+もう一度、ブラウザで Laravel Jetstream の dashboard へアクセスして問題なければOK
+
 
 ***
 + [pageTop](#pageTop)
@@ -728,15 +902,10 @@ ls -la
 https://laravel.com/docs/9.x
 >+ Laravel インストーラー のセットアップ<br>
 https://laravel.com/docs/9.x#the-laravel-installer
->+ laravel サーバー構成 Nginx<br>
-https://laravel.com/docs/9.x/deployment#nginx
+>+ laravel サーバー要件<br>
+https://laravel.com/docs/9.x/deployment#server-requirements
 >
->**MariaDB**<br>
-> + MariaDB入門<br>
-https://www.dbonline.jp/mariadb/
+>**Laravel Jetstream**<br>
+> + Jetstream のインストール<br>
+https://jetstream.laravel.com/2.x/installation.html
 >
->**SFTP**<br>
->+ sftp コマンドでファイルを転送する方法<br>
-https://dezanari.com/ssh-sftp/#toc3
->+ sftp（Filezilla）を使用して Amazon Lightsail の Linux または UNIX インスタンスに接続する<br>
-https://lightsail.aws.amazon.com/ls/docs/ja_jp/articles/amazon-lightsail-connecting-to-linux-unix-instance-using-sftp
