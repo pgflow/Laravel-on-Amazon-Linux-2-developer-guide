@@ -19,4 +19,5 @@
 + [MariaDB](MariaDB-on-Amazon-Linux-2-install-guide.md)
 + [Git](Git-on-Amazon-Linux-2-install-guide.md)
 + [Laravel](Laravel-on-Amazon-Linux-2-install-guide.md)
++ [Laravel Jetstream](Laravel_Jetstream-on-Amazon-Linux-2-install-guide.md)
 + [Visual Studio Code](test)
