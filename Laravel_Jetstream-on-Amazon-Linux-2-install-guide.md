@@ -110,7 +110,7 @@ select * from mysql.user where user='laravel-jetstream'\G
                   User: laravel-jetstream
 ```
 
-## <a name="setup_MariaDB_Laravel_user_setting"></a>Laravel Jetstream で使用するユーザーへデータベース レベルの権限を設定
+## <a name="setup_MariaDB_Laravel_Jetstream_user_setting"></a>Laravel Jetstream で使用するユーザーへデータベース レベルの権限を設定
 grant all で全ての権限が対象のデータベースに対して指定したユーザーに設定されます。
 ```
 grant all on データベース名.* to ユーザー名@接続元;
@@ -125,7 +125,7 @@ grant all on laravel_jetstream_db.* to 'laravel-jetstream'@'localhost';
 grant all on laravel_jetstream_db.* to 'laravel-jetstream';
 ```
 
-## <a name="setup_MariaDB_Laravel_user_db"></a>作成したユーザーで権限設定したデータベースを確認
+## <a name="setup_MariaDB_Laravel_Jetstream_user_db"></a>作成したユーザーで権限設定したデータベースを確認
 
 root で MariaDB に入っているので、exit で一度抜けます。
 ```
