@@ -277,7 +277,7 @@ control + x
 ```
 
 ## nginx.conf を編集
-[NGINX へ Laravel プロジェクトの設定準備](Laravel-on-Amazon-Linux-2-install-guide.md#a-name"nginxconf"anginx-へ-laravel-プロジェクトの設定準備)を参考にして nginx.conf に 追記してください。
+[NGINX へ Laravel プロジェクトの設定準備](Laravel-on-Amazon-Linux-2-install-guide.md#nginxconf)を参考にして nginx.conf に 追記してください。
 
 例：nginx.conf
 ```
