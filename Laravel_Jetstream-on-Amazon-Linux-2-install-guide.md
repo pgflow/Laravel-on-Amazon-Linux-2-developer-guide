@@ -10,7 +10,6 @@
 
 
 ## 目次
-***
 + [Laravel Jetstream で MariaDB を使用する準備](#setup_MariaDB_Laravel_Jetstream_db)
    + [Laravel Jetstream で使用するデータベースの作成](#setup_MariaDB_Laravel_Jetstream_db)
    + [Laravel Jetstream で使用するユーザーの作成](#setup_MariaDB_Laravel_Jetstream_user)
@@ -152,6 +151,12 @@ MariaDB [(none)]> show databases;
 | laravel_jetstream_db |
 +----------------------+
 2 rows in set (0.000 sec)
+```
+
+MariaDB に入っているので、exit で抜けます。
+```
+MariaDB [(none)]> exit
+Bye
 ```
 
 ***
