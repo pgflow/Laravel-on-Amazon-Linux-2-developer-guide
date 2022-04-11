@@ -20,4 +20,5 @@
 + [Git](Git-on-Amazon-Linux-2-install-guide.md)
 + [Laravel](Laravel-on-Amazon-Linux-2-install-guide.md)
 + [Laravel Jetstream](Laravel_Jetstream-on-Amazon-Linux-2-install-guide.md)
-+ [Visual Studio Code](test)
++ [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
+
