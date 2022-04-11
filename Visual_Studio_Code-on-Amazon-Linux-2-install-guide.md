@@ -17,8 +17,10 @@
 ローカルコンピュータの ユーザー名/.ssh/ ディレクトリ内の、<br>
 "config" ファイル<br>
 エンコードタイプが "UTF-8 with BOM" で<br>
-改行コードが "CRLF" の場合に<br>
-"Bad configuration option: \357\273\277" エラーが現れる場合がある。
+改行コードが "CRLF" の場合に以下のエラーが現れる場合がある。<br>
+```
+Bad configuration option: \357\273\277
+```
 
 "config" ファイルの<br>
 エンコードタイプを "UTF-8" に変更し<br>
