@@ -1,17 +1,15 @@
-エラーとその対処
-
-## Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md
+# Visual Studio Code on Amazon Linux 2 install guide
 
 
-Visual Studio Code からSSH 接続出来ない
-SSH 接続出来ない
 
-Remote - SSH 機能拡張
++ [Remote - SSH 機能拡張 を使用して SSH 接続できないエラー](#remote_ssh_error)
+    + [Bad configuration option: \357\273\277](#remote_ssh_\357\273\277)
+    + [Permissions 0644 for 'xxxxxxxxxxx.pem' are too open.](#remote_ssh_pem_permissions)
 
-+ [Remote - SSH 機能拡張 を使用して SSH 接続できないエラー](#remote_ssh_\357\273\277)
-## <a name="remote_ssh_\357\273\277"></a>Remote - SSH 機能拡張 を使用して SSH 接続できないエラー
+***
+## <a name="#remote_ssh_error"></a>Remote - SSH 機能拡張 を使用して SSH 接続できないエラー
 
-## Bad configuration option: \357\273\277
+## <a name="remote_ssh_\357\273\277"></a>> Bad configuration option: \357\273\277
 ※ Windows 環境だと関係ないかもしれません。
 
 **config ファイルの確認と変更ポイント**
@@ -25,3 +23,19 @@ Remote - SSH 機能拡張
 "config" ファイルの<br>
 エンコードタイプを "UTF-8" に変更し<br>
 改行コードを "LF" に変更して保存し直すと解決する。
+
+## <a name="remote_ssh_pem_permissions"></a>> Permissions 0644 for 'xxxxxxxxxxx.pem' are too open.
+※ Windows 環境だと関係ないかもしれません。<br>
+以下の エラーが表示される場合があります。
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ WARNING: UNPROTECTED PRIVATE KEY FILE! @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for 'xxxxxxxxxxx.pem' are too open.
+```
+
+ローカルコンピュータの ユーザー名/.ssh/ ディレクトリ内の、<br>
+"xxxxxxxxxxx.pem" ファイルのパーミッション を変更します。
+```
+chmod 600 xxxxxxxxxxx.pem
+```
