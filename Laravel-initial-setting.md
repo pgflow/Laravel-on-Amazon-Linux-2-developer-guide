@@ -1,7 +1,4 @@
 # Laravel initial setting
-
-
-
 + [Laravel 初期設定 日本時間と日本語環境へ変更](#laravel_timezone)
     + [タイムゾーン](#laravel_timezone)
     + [ローカルコンフィギュレーション](#laravel_locale_configuration)
