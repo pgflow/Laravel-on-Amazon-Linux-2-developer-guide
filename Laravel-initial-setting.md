@@ -1,11 +1,12 @@
 # Laravel initial setting
-+ [Laravel 初期設定 日本時間と日本語環境へ変更](#laravel_timezone)
++ [Laravel 初期設定 日本時間と日本語環境へ変更](#laravel_settings)
     + [タイムゾーン](#laravel_timezone)
     + [ローカルコンフィギュレーション](#laravel_locale_configuration)
     + [ローカルコンフィギュレーション関連ファイルの作成](#laravel_locale_configuration_file)
     + [Laravel Jetstream ユーザープロファイル 日本語化](#laravel_jetstream_profile_ja)
 ***
-## Laravel 初期設定 日本時間と日本語環境へ変更
+
+## <a name='laravel_settings'></a>Laravel 初期設定 日本時間と日本語環境へ変更
 
 >Laravel 9 ローカリゼーション</br>
 >https://laravel.com/docs/9.x/localization</br>
