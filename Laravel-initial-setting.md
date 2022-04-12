@@ -168,7 +168,7 @@
 ## <a name='laravel_jetstream_profile_ja'></a>Laravel Jetstream ユーザープロファイル 日本語化
 
 例として、ユーザープロファイルページの日本語化を説明</br>
-http://example.xxx/user/profile
+`http://example.xxx/user/profile`
 
 profile ページに関連する blade テンプレートは以下の通り。
 ```
