@@ -18,9 +18,12 @@
 + [Composer](Composer-on-Amazon-Linux-2-install-guide.md)
 + [MariaDB](MariaDB-on-Amazon-Linux-2-install-guide.md)
 + [Git](Git-on-Amazon-Linux-2-install-guide.md)
+***
 + [Laravel](Laravel-on-Amazon-Linux-2-install-guide.md)
 + [Laravel Jetstream](Laravel_Jetstream-on-Amazon-Linux-2-install-guide.md)
-+ [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
-
-
++ [Laravel 初期設定](Laravel-Initial-setting.md)
 + [補足資料：Laravel 9 Import Export Excel and CSV File Tutorial](Laravel-9-Import-Export-Excel-and-CSV-File-Tutorial.md)
+
+***
++ [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
+***
