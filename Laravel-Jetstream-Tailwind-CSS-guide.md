@@ -15,6 +15,7 @@
     + [ブラウザのキャッシュを削除](#tailwindcss_browser_clear_cache)
     + [開発中の WebSite からローカルにキャッシュを保存させない](#tailwindcss_cache_control_no_cache)
     + [welcome.blade.php で Tailwind CSS を使用する](#tailwindcss_welcome_blade_php)
+    + [max_user_watches 変更対象の上限数を変更する必要がある場合](#max_user_watches)
 ***
 
 ## <a name="tailwindcss"></a>**Tailwind CSS 概要**
@@ -23,7 +24,7 @@
 以下の手順ですぐに実行できます。**
 
 Tailwind CSSは、すべてのHTMLファイル、JavaScriptコンポーネント、およびその他のテンプレートでクラス名をスキャンし、対応するスタイルを生成して、静的CSSファイルに書き込むことで機能します。 <br>
->**Get started with Tailwind CSS**<br>https://tailwindcss.com/docs/installation
+>Get started with Tailwind CSS<br>https://tailwindcss.com/docs/installation
 
 Tailwind CSS は、HTMLファイルの html tag に書いた、class="xxx" CSS スタイルの変更を見つけ、CSSとJS を独自にコンパイルして css と js ファイルを作成します。
 ```
@@ -42,7 +43,7 @@ Tailwind CSS は、HTMLファイルの html tag に書いた、class="xxx" CSS �
 
 ## <a name="tailwindcss_compile"></a>**Tailwind CSS コンパイル概要**
 
->**Laravel Jetstream > Tailwind**</br>
+>Laravel Jetstream > Tailwind</br>
 https://jetstream.laravel.com/2.x/concept-overview.html#tailwind
 
 新しい Terminal window を開きます。</br>
@@ -86,22 +87,22 @@ webpack compiled successfully
 
 ## <a name="tailwindcss_compile_command"></a>**Tailwind CSS コンパイル コマンド**
 
-開発のためにCSS / JavaScriptをコンパイルし、変更時に再コンパイルします</br>
-※Tailwind CSS の編集中に実行します。
+
+開発のためにCSS / JavaScriptをコンパイルし、変更時に再コンパイル。※Tailwind CSS の編集中に実行します。</br>
+Compile your CSS / JavaScript for development and recompile on change...
 ```
-# Compile your CSS / JavaScript for development and recompile on change...
 npm run watch
 ```
 
-開発のためにCSS/JavaScriptをコンパイル
+開発のためにCSS/JavaScriptをコンパイル</br>
+Compile your CSS / JavaScript for development...
 ```
-# Compile your CSS / JavaScript for development...
 npm run dev
 ```
 
-本番用にCSS/JavaScriptをコンパイル
+本番用にCSS/JavaScriptをコンパイル</br>
+Compile your CSS / JavaScript for production...
 ```
-# Compile your CSS / JavaScript for production...
 npm run prod
 ```
 
@@ -149,12 +150,35 @@ welcome.blade.php の ```head``` 属性の中に ```<link rel="stylesheet" href=
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 ```
+
+## <a name="max_user_watches"></a>```npm run watch``` **変更対象の上限数を変更する必要がある場合**
+
+>Error: ENOSPC: System limit for number of file watchers reached<br>
+https://blog.dksg.jp/2019/09/error-enospc-system-limit-for-number-of.html
+
+現在の設定値を確認
+```
+cat /proc/sys/fs/inotify/max_user_watches
+```
+
+応答（ Amazon Linux 2 のデフォルト値 ）
+```
+8192
+```
+
+値を変更（ 524288 は、8192（デフォルト値）の64倍です ）
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
 ***
 + [pageTop](#pageTop)
 + [README](README.md)
 ***
 
->**Get started with Tailwind CSS**<br>
+>Get started with Tailwind CSS<br>
 https://tailwindcss.com/docs/installation<br>
->**Laravel Jetstream > Tailwind**</br>
-https://jetstream.laravel.com/2.x/concept-overview.html#tailwind
+>Laravel Jetstream > Tailwind</br>
+https://jetstream.laravel.com/2.x/concept-overview.html#tailwind</br>
+>LError: ENOSPC: System limit for number of file watchers reached</br>
+https://blog.dksg.jp/2019/09/error-enospc-system-limit-for-number-of.html

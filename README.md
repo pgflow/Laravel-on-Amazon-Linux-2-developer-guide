@@ -27,3 +27,6 @@
 ***
 + [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
 ***
+外部のサイト
+ + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
+***
