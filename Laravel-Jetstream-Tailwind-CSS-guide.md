@@ -1,4 +1,4 @@
-# <a name="pageTop"></a>**Tailwind CSS guide**
+# <a name="pageTop"></a>**Laravel Jetstream Tailwind CSS guide**
 
 作成日：2022/04/20<br>
 
