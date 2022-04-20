@@ -151,7 +151,7 @@ welcome.blade.php の ```head``` 属性の中に ```<link rel="stylesheet" href=
 </head>
 ```
 
-## <a name="max_user_watches"></a>```npm run watch``` **変更対象ファイルの監視上限数を変更する必要がある場合**
+## <a name="max_user_watches"></a>```max_user_watches``` **変更対象ファイルの監視上限数を変更する必要がある場合**
 
 >Error: ENOSPC: System limit for number of file watchers reached<br>
 https://blog.dksg.jp/2019/09/error-enospc-system-limit-for-number-of.html
