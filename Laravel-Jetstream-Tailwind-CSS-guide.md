@@ -15,7 +15,7 @@
     + [ブラウザのキャッシュを削除](#tailwindcss_browser_clear_cache)
     + [開発中の WebSite からローカルにキャッシュを保存させない](#tailwindcss_cache_control_no_cache)
     + [welcome.blade.php で Tailwind CSS を使用する](#tailwindcss_welcome_blade_php)
-    + [max_user_watches 変更対象の上限数を変更する必要がある場合](#max_user_watches)
+    + [max_user_watches 変更対象ファイルの監視上限数を変更する必要がある場合](#max_user_watches)
 ***
 
 ## <a name="tailwindcss"></a>**Tailwind CSS 概要**
@@ -151,7 +151,7 @@ welcome.blade.php の ```head``` 属性の中に ```<link rel="stylesheet" href=
 </head>
 ```
 
-## <a name="max_user_watches"></a>```npm run watch``` **変更対象の上限数を変更する必要がある場合**
+## <a name="max_user_watches"></a>```npm run watch``` **変更対象ファイルの監視上限数を変更する必要がある場合**
 
 >Error: ENOSPC: System limit for number of file watchers reached<br>
 https://blog.dksg.jp/2019/09/error-enospc-system-limit-for-number-of.html
