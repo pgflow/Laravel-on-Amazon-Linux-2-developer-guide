@@ -10,7 +10,7 @@
 
 ## 目次
 + [Tailwind CSS 概要](#tailwindcss)
-    + [Tailwind CSS コンパイル概要](#tailwindcss_compile)
+    + [Tailwind CSS コンパイル 概要](#tailwindcss_compile)
     + [Tailwind CSS コンパイル コマンド](#tailwindcss_compile_command)
     + [ブラウザのキャッシュを削除](#tailwindcss_browser_clear_cache)
     + [開発中の WebSite からローカルにキャッシュを保存させない](#tailwindcss_cache_control_no_cache)
@@ -41,7 +41,7 @@ Tailwind CSS は、HTMLファイルの html tag に書いた、class="xxx" CSS �
 ※ コンパイルし作成された app.css および app.js はブラウザにキャッシュされるため、Tailwind CSS を利用して編集変更しても HTMLファイルが反映されないように見える場合があります。
 
 
-## <a name="tailwindcss_compile"></a>**Tailwind CSS コンパイル概要**
+## <a name="tailwindcss_compile"></a>**Tailwind CSS コンパイル 概要**
 
 >Laravel Jetstream > Tailwind</br>
 https://jetstream.laravel.com/2.x/concept-overview.html#tailwind
