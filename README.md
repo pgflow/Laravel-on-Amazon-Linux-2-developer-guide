@@ -27,28 +27,8 @@
 ***
 + [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
 ***
-## 外部のサイト
+## 🔖**Bookmark**
 
-**AWS**
-+ Amazon EC2 , Lightsail
-    + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
-
-**Laravel**
-+ **Laravel**
-    + [Laravel](https://laravel.com/)
-
-+ **Laravel Jetstream**
-    + [Laravel Jetstream](https://jetstream.laravel.com)
-
-+ **Laravel Livewire**
-    + [Laravel Livewire](https://laravel-livewire.com/)
-    + [laravel-news/Laravel Livewire：14のヒントとコツ](https://laravel-news.com/laravel-livewire-tips-and-tricks)
-
-**Tailwind CSS**
-+ [Tailwind CSS](https://tailwindcss.com/)
-+ [Tailwind Elements](https://tailwind-elements.com/)
-
-**Web Service**
 + ☁️**AWS**
     + [AWS](https://aws.amazon.com/jp/)
     + [Amazon Lightsail（仮想マシン、コンテナ、データベース、CDN、ロードバランサー、DNS 管理）](https://lightsail.aws.amazon.com) 
@@ -56,6 +36,21 @@
     + [Amazon Route 53（ドメインネームシステム (DNS) サービス）](https://aws.amazon.com/jp/route53/)
     + [AWS CodeCommit（プライベート Git リポジトリでのコードの保存）](https://aws.amazon.com/jp/codecommit/)
 
+    + **Tips**
+        + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
+
++ <img src="https://laravel.com/img/logomark.min.svg)" alt="Laravel icon svg" width="20" height="20"> **Laravel**
+
+    + [Laravel](https://laravel.com/)
+    + [Laravel Jetstream](https://jetstream.laravel.com)
+    + [Laravel Livewire](https://laravel-livewire.com/)
+    + **Tips**
+        + [laravel-news/Laravel Livewire：14のヒントとコツ](https://laravel-news.com/laravel-livewire-tips-and-tricks)
+
++ 🌬️**Tailwind CSS**
+    + [Tailwind CSS](https://tailwindcss.com/)
+    + [Tailwind Elements](https://tailwind-elements.com/)
+    
 + 📬**Email**
     + [Safe Email Testing With Mailtrap’s Fake SMTP Server（偽のSMTPサーバーを使用した安全な電子メールテスト）](https://mailtrap.io/fake-smtp-server/)
     + [ProtonMail（End-to-End Encryption 及び、独自ドメインメールの受信）](https://protonmail.com/jp/)
