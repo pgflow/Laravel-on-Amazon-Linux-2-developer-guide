@@ -27,14 +27,46 @@
 ***
 + [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
 ***
-外部のサイト
- + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
-***
+## 外部のサイト
+
+**AWS**
++ Amazon EC2 , Lightsail
+    + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
+
+**Laravel**
++ **Laravel**
+    + [Laravel](https://laravel.com/)
+
 + **Laravel Jetstream**
     + [Laravel Jetstream](https://jetstream.laravel.com)
-***
+
 + **Laravel Livewire**
-    + [Laravel Livewire：14のヒントとコツ](https://laravel-news.com/laravel-livewire-tips-and-tricks)
+    + [Laravel Livewire](https://laravel-livewire.com/)
+    + [laravel-news/Laravel Livewire：14のヒントとコツ](https://laravel-news.com/laravel-livewire-tips-and-tricks)
 
+**Tailwind CSS**
++ [Tailwind CSS](https://tailwindcss.com/)
++ [Tailwind Elements](https://tailwind-elements.com/)
 
-***
+**Web Service**
++ ☁️**AWS**
+    + [Amazon Lightsail（仮想マシン、コンテナ、データベース、CDN、ロードバランサー、DNS 管理）](https://lightsail.aws.amazon.com) 
+    + [Amazon Simple Email Service（電子メールサービス）](https://aws.amazon.com/jp/ses/)
+    + [Amazon Route 53（ドメインネームシステム (DNS) サービス）](https://aws.amazon.com/jp/route53/)
+    + [AWS CodeCommit（プライベート Git リポジトリでのコードの保存）](https://aws.amazon.com/jp/codecommit/)
+
++ 📬**Email**
+    + [Safe Email Testing With Mailtrap’s Fake SMTP Server（偽のSMTPサーバーを使用した安全な電子メールテスト）](https://mailtrap.io/fake-smtp-server/)
+    + [ProtonMail（End-to-End Encryption 及び、独自ドメインメールの受信）](https://protonmail.com/jp/)
+
++ 🖥️**Git**
+    + **Git**
+        + [Git](https://git-scm.com/)
+        + [Pro Git book](https://git-scm.com/book/)
+    + **GitHub**
+        + [GitHub](https://github.com/)
+        + [Git Guide (GitHub)](https://github.com/git-guides)
+        + [GitHub Desktop](https://desktop.github.com/)
+    + **Bitbucket**
+        + [Bitbucket](https://bitbucket.org/)
+        + [Sourcetree](https://www.sourcetreeapp.com/)
