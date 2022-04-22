@@ -39,7 +39,7 @@
     + **Tips**
         + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
 
-+ <img src="https://laravel.com/img/logomark.min.svg)" alt="Laravel icon svg" width="20" height="20"> **Laravel**
++ <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel icon svg" width="16" height="16"> **Laravel**
 
     + [Laravel](https://laravel.com/)
     + [Laravel Jetstream](https://jetstream.laravel.com)
