@@ -50,6 +50,7 @@
 
 **Web Service**
 + ☁️**AWS**
+    + [AWS](https://aws.amazon.com/jp/)
     + [Amazon Lightsail（仮想マシン、コンテナ、データベース、CDN、ロードバランサー、DNS 管理）](https://lightsail.aws.amazon.com) 
     + [Amazon Simple Email Service（電子メールサービス）](https://aws.amazon.com/jp/ses/)
     + [Amazon Route 53（ドメインネームシステム (DNS) サービス）](https://aws.amazon.com/jp/route53/)
@@ -70,3 +71,7 @@
     + **Bitbucket**
         + [Bitbucket](https://bitbucket.org/)
         + [Sourcetree](https://www.sourcetreeapp.com/)
+
++ 🗃️**Database**
+    + [Data Types in MariaDB](https://mariadb.com/kb/en/data-types/)
+    + [HeidiSQL OpenSource Database client](https://www.heidisql.com/)
