@@ -57,7 +57,7 @@ watch コマンドで HTML （laravel の場合 .blade.php ）ファイルの変
 npm run watch
 ```
 
-応答（ **npm run watch は実行し続けるので control + C で終了します。**）
+応答（ **npm run watch は実行し続けるので、終了する際は、control + C で終了。**）
 ```
 > watch
 > mix watch
@@ -81,7 +81,7 @@ npm run watch
 └─────────────────────────────────────────────────────────────────────────────────────────┴──────────┘
 webpack compiled successfully
 ```
-**npm run watch は実行し続けるので control + C で終了します。**
+**npm run watch は実行し続けるので、終了する際は、control + C で終了。**
 
 ※ Tailwind CSS でファイルを編集中は、Terminal window で ```npm run watch``` を実行し続ける必要があります。そうしないと、Tailwind CSS での変更が反映されません。
 

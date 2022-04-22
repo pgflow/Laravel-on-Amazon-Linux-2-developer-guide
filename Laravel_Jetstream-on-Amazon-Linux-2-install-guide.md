@@ -749,10 +749,10 @@ resources/views/vendor/jetstream/components/application-mark.blade.php
 npm run dev
 ```
 
-**> storage のユーザーとグループを、webサーバー のユーザー apache に変更する**
+**> ディレクトリ、 storage と bootstrap/cache のグループを、webサーバー のグループ apache に変更する**
 ```
 cd /srv/www/laravel-jetstream/
-sudo chown -R apache:apache storage/
+sudo chown -R ec2-user:apache storage bootstrap/cache
 ls -la
 ```
 

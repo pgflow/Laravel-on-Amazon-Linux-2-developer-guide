@@ -967,15 +967,17 @@ ls -la
 drwxrwxr-x  5 ec2-user ec2-user     46 Mar 29 14:48 storage
 ```
 
-storage のユーザーとグループを、 apache に変更する。
+ディレクトリ、 storage と bootstrap/cache のグループを、webサーバー のグループ apache に変更する
+※ bootstrap/cache も変更する理由は、```php artisan make:livewire``` などの command を実行した際に問題が出るため。
 ```
-sudo chown -R apache:apache storage/
+cd /srv/www/laravel-jetstream/
+sudo chown -R ec2-user:apache storage bootstrap/cache
 ls -la
 ```
 
 応答
 ```
-drwxrwxr-x  5 apache   apache       46 Mar 29 14:48 storage
+drwxrwxr-x  5 ec2-user   apache       46 Mar 29 14:48 storage
 ```
 変更出来た。
 
