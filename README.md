@@ -29,7 +29,12 @@
 ***
 外部のサイト
  + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
-
+***
++ **Laravel Jetstream**
+    + [Laravel Jetstream](https://jetstream.laravel.com)
+***
 + **Laravel Livewire**
     + [Laravel Livewire：14のヒントとコツ](https://laravel-news.com/laravel-livewire-tips-and-tricks)
+
+
 ***
