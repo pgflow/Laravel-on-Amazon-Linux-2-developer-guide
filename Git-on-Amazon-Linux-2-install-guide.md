@@ -38,6 +38,11 @@ git version
 git version 2.32.0
 ```
 
+設定
+```
+git config --global init.defaultBranch main
+```
+
 ***
 + [pageTop](#pageTop)
 + [README](README.md)
