@@ -20,12 +20,15 @@
 + [Git](Git-on-Amazon-Linux-2-install-guide.md)
 ***
 + [Laravel](Laravel-on-Amazon-Linux-2-install-guide.md)
++ [Laravel Debugbar](Laravel-Debugbar-on-Amazon-Linux-2-install-guide.md)
 + [Laravel Jetstream](Laravel_Jetstream-on-Amazon-Linux-2-install-guide.md)
 + [Laravel Jetstream Tailwind CSS guide](Laravel-Jetstream-Tailwind-CSS-guide.md)
 + [Laravel 初期設定 日本時間と日本語環境へ変更](Laravel-initial-setting.md)
 + [補足資料：Laravel 9 Import Export Excel and CSV File Tutorial](Laravel-9-Import-Export-Excel-and-CSV-File-Tutorial.md)
 ***
 + [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
++ [Command Line Reference](Command-Line-Reference.md)
+
 ***
 ## 🔖**Bookmarks**
 
