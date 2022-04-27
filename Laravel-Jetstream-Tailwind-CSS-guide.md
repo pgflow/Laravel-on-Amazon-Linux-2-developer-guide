@@ -156,6 +156,9 @@ welcome.blade.php の ```head``` 属性の中に ```<link rel="stylesheet" href=
 >Error: ENOSPC: System limit for number of file watchers reached<br>
 https://blog.dksg.jp/2019/09/error-enospc-system-limit-for-number-of.html
 
+>「VisualStudioCodeは、この大きなワークスペースでのファイルの変更を監視できません」（エラーENOSPC）<br>
+>https://code.visualstudio.com/docs/setup/linux#_visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc
+
 現在の設定値を確認
 ```
 cat /proc/sys/fs/inotify/max_user_watches
@@ -166,9 +169,38 @@ cat /proc/sys/fs/inotify/max_user_watches
 8192
 ```
 
-値を変更（ 524288 は、8192（デフォルト値）の64倍です ）
+インスタンスのメモリ空き量から検討して計算し設定します。</br>
+メモリの空き容量を調べます。
+```
+free -m
+```
+
+応答
+```
+              total        used        free      shared  buff/cache   available
+Mem:            982         624         126           0         230         183
+Swap:          2047         113        1934
+```
+
+
+値を変更（ 131072 は、8192（デフォルト値）の16倍です ）最大約134MiB のメモリが消費されます。
+```
+echo fs.inotify.max_user_watches=131072 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+値を変更（ 262144 は、8192（デフォルト値）の32倍です ）最大約270MiB のメモリが消費されます。
+```
+echo fs.inotify.max_user_watches=262144 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+値を変更（ 524288 は、8192（デフォルト値）の64倍です ）最大約540MiB のメモリが消費されます。
 ```
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+```sysctl -p``` を実行して新しい値をロードできます。 
+```
+sudo sysctl -p
 ```
 
 ***
