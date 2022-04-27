@@ -15,7 +15,10 @@
    + [laravel Debugbar の非表示](#laravel_debugbar_false)
 ***
 
-## <a name="laravel_debugbar"></a>Laravel Debugbar インストーラー
+## <a name="laravel_debugbar"></a>Laravel Debugbar
+>Laravel Debugbar<br>
+>https://github.com/barryvdh/laravel-debugbar<br>
+
 Debugbar をインストールする Laravel プロジェクトディレクトリへ移動します。
 ```
 cd /srv/www/laravel
