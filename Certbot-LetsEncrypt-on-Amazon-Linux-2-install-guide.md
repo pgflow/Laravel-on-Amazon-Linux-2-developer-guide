@@ -8,26 +8,21 @@
 + NGINX を使用して HTTP(80ポート)で WebSiteをホストしてること。<br>-> [インストールガイド NGINX on Amazon Linux 2 install guide](NGINX-on-Amazon-Linux-2-install-guide.md) 
 
 ## 目次
-+ [PHP8.0 インストール](#install_php)
++ [nginx.conf へ独自ドメインを設定する](#nginx_conf_domain)
++ [リポジトリを有効にする](#epel)
++ [Certbot をインストールする](#certbot_install)
++ [Certbot を実行](#sudo_certbot)
++ [HTTPS TCP 443 のポートを開く](#443)
++ [インストールの参考にした WebSite](#reference_website)
+***
+## <a name="nginx_conf_domain"></a>nginx.conf へ独自ドメインを設定する
 
-
-+ [PHP8.0 インストール](#install_php)
-+ [ブラウザでアクセスし PHP が動作出来るか確認する](#welcome_php)
-+ [php-fpm サービスコマンドリスト](#status_php-fpm_service)
-+ [PHP8.0 インストールの参考にした WebSite](#reference_website_php)
-
-
-
-
-
-## nginx.conf へ独自ドメインを設定する
-
-
+nginx.conf を編集します。
 ```
 sudo nano /etc/nginx/nginx.conf
 ```
 
-```server_name  _;``` と書いている所の ```_``` を、独自ドメインに書き換えます。
+```server_name  _;``` と書いている所の ```_``` を、独自ドメインに書き換え保存します。
 
 変更前
 ```
@@ -40,4 +35,154 @@ sudo nano /etc/nginx/nginx.conf
     server {
         server_name  example.com;
 ```
+NGINX コンフィグファイルの再読み込み
+```
+sudo systemctl reload nginx
+```
+独自ドメイン名にブラウザでアクセスし、正常に表示されたらOK
 
+## <a name="epel"></a>EPEL リポジトリを有効にする
+Certbot をインストールする前準備にEPEL リポジトリを有効にします。
+```
+sudo amazon-linux-extras install epel -y
+```
+
+応答
+```
+Installing epel-release
+~~~
+~~~
+Installed:
+  epel-release.noarch 0:7-11
+
+Complete!
+~~~
+ 24  epel=latest              enabled      [ =7.11  =stable ]
+```
+
+## <a name="certbot_install"></a>Certbot をインストールする
+nginx に設定を出来るようオプションを指定して Certbot をインストールします。
+```
+sudo yum install -y certbot python2-certbot-nginx
+```
+
+応答
+```
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                     | 3.7 kB  00:00:00
+218 packages excluded due to repository priority protections
+Resolving Dependencies
+--> Running transaction check
+
+~~~
+
+Transaction Summary
+======================================================================================================
+Install  2 Packages (+26 Dependent packages)
+
+~~~
+
+Installed:
+  certbot.noarch 0:1.11.0-2.el7              python2-certbot-nginx.noarch 0:1.11.0-1.el7
+
+~~~
+
+Complete!
+```
+
+## <a name="sudo_certbot"></a>Certbot を実行
+Certbot を使用して、Lets'Encrypt を利用するに必要なファイル作成と nginx.conf の編集を自動で行います。
+```example.com``` を使用するドメイン名に読み替えてください
+```
+sudo certbot --nginx -d example.com
+```
+
+応答、連絡の付くメールアドレスを入力します。
+```
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator nginx, Installer nginx
+Enter email address (used for urgent renewal and security notices)
+ (Enter 'c' to cancel):
+ ```
+
+ 応答、利用規約を読み同意が必要です。(Y)でok
+ ```
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+agree in order to register with the ACME server. Do you agree?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o:
+ ```
+
+ 応答、EFFのニュースなどを購読するか聞かれます。(N)でok
+ ```
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Would you be willing, once your first certificate is successfully issued, to
+share your email address with the Electronic Frontier Foundation, a founding
+partner of the Let's Encrypt project and the non-profit organization that
+develops Certbot? We'd like to send you email about our work encrypting the web,
+EFF news, campaigns, and ways to support digital freedom.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o:
+```
+
+応答、アカウントが登録され、certbot による Let's Encrypt の設定が完了した。
+```
+Account registered.
+Requesting a certificate for example.com
+Performing the following challenges:
+http-01 challenge for example.com
+Waiting for verification...
+Cleaning up challenges
+Deploying Certificate to VirtualHost /etc/nginx/nginx.conf
+Redirecting all traffic on port 80 to ssl in /etc/nginx/nginx.conf
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Congratulations! You have successfully enabled https://example.com
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/example.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/example.com/privkey.pem
+   Your certificate will expire on 2022-08-04. To obtain a new or
+   tweaked version of this certificate in the future, simply run
+   certbot again with the "certonly" option. To non-interactively
+   renew *all* of your certificates, run "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+
+nginx.conf が書き換えられたので、NGINX コンフィグファイルの再読み込みをします。
+```
+sudo systemctl reload nginx
+```
+
+## <a name="443"></a>HTTPS TCP 443 のポートを開く
+インスタンス の ファイヤーウォール に HTTPS TCP 443 のポートを開くためのルールを追加します。
+
+![インスタンス の ファイヤーウォール に HTTPS TCP 443 のポートを開くためのルールを追加します。](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/IPv4-HTTPS-TCP-443.png)
+
+
+設定した独自ドメインへブラウザでアクセスする。
+
+![アドレスバーの先頭に鍵のアイコンが表示され、安全な接続となっていれば設定は完了です。](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/HTTPS-icon.png)
+
+アドレスバーの先頭に鍵のアイコンが表示され、安全な接続となっていれば設定は完了です。
+
+***
++ [pageTop](#pageTop)
++ [README](README.md)
+***
+
+><a name="reference_website"></a>**インストールの参考にした WebSite**<br>
+>Amazon Linux を実行している Amazon EC2 インスタンスの EPEL リポジトリを有効にするにはどうすればよいですか?<br>
+>https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-enable-epel/<br>
+>AWSEC2へのnginxとcertbotのインストール<br>
+>https://techread.me/installing-nginx-and-certbot-on-aws-ec2/<br>
+>チュートリアル: Amazon Linux 2 に SSL/TLS を設定する<br>
+>https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html
