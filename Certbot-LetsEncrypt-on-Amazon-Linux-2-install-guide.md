@@ -9,7 +9,7 @@
 
 ## 目次
 + [nginx.conf へ独自ドメインを設定する](#nginx_conf_domain)
-+ [リポジトリを有効にする](#epel)
++ [EPELリポジトリを有効にする](#epel)
 + [Certbot をインストールする](#certbot_install)
 + [Certbot を実行](#sudo_certbot)
 + [HTTPS TCP 443 のポートを開く](#443)
