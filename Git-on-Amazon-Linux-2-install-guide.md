@@ -82,7 +82,8 @@ user.email=your@mailaddress
 ```
 
 ## <a name="project_gitconfig"></a>プロジェクト毎のGitの構成
->このステップには、AWS CodeCommit に作成した空のリポジトリURLとIAM ユーザー用の Git 認証情報が必要です。
+
+このステップには、AWS CodeCommit に作成した空のリポジトリURLとIAM ユーザー用の Git 認証情報が必要です。
 
 プロジェクトディレクトリへ移動します。
 ```
@@ -175,7 +176,30 @@ To https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/example-app
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 
->AWS CodeCommit にログインし、リポジトリの変更が反映されているか確認してください。
+設定を確認します。
+```
+git config --list
+```
+
+応答
+```
+core.autocrlf=input
+init.defaultbranch=main
+user.name=
+user.email=
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+init.defaultbranch=main
+user.name=company your name
+user.email=company.your@mailaddress
+remote.origin.url=https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/example-app
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+```
+
+AWS CodeCommit にログインし、リポジトリの変更が反映されているか確認してください。
 
 ***
 + [pageTop](#pageTop)
