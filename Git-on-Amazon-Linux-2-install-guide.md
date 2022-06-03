@@ -82,6 +82,7 @@ user.email=your@mailaddress
 ```
 
 ## <a name="project_gitconfig"></a>プロジェクト毎のGitの構成
+>このステップには、AWS CodeCommit に作成した空のリポジトリURLとIAM ユーザー用の Git 認証情報が必要です。
 
 プロジェクトディレクトリへ移動します。
 ```
@@ -122,11 +123,59 @@ git config user.name "company your name"
 git config user.email company.your@mailaddress
 ```
 
+リモートリポジトリの追加
+※AWS CodeCommit に作成した空のリポジトリURLが必要です。
 ```
-git remote add origin https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/example-app
+git remote add origin https://git-codecommit.ap-northeast-x.amazonaws.com/v1/repos/example-app
 ```
 
+最初のファイルを作成して、```fast``` と書いて保存します。※ファイル名や内容は何でもよい。
+```
+nano fast.txt
+```
+```control + O``` で保存し、 ```control + X``` で閉じます。
 
+バージョン管理を始めます。
+```
+git add fast.txt
+```
+コメントを付けて、コミットします。
+```
+git commit -m 'initial project version'
+```
+応答
+```
+[main 62f90dc] initial project version
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+変更を ```push``` します。
+```
+git push --set-upstream origin main
+```
+
+Username を入力（IAM ユーザー用の Git 認証情報）
+```
+Username for 'https://git-codecommit.ap-northeast-1.amazonaws.com':
+```
+
+Password を入力（IAM ユーザー用の Git 認証情報）
+```
+Password for 'https://pymana-at-055966712913@git-codecommit.ap-northeast-1.amazonaws.com':
+```
+
+応答
+```
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 260 bytes | 260.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/example-app
+   ba7a2ed..62f90dc  main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+```
+
+>AWS CodeCommit にログインし、リポジトリの変更が反映されているか確認してください。
 
 ***
 + [pageTop](#pageTop)
