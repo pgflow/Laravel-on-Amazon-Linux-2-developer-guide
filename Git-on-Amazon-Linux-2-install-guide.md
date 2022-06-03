@@ -6,6 +6,7 @@
 
 ## 目次
 + [Git インストール](#install_Git)
++ [最初のGitの構成](#gitconfig)
 
 ## <a name="install_Git"></a>Git インストール
 Git がインストール済みか確認する
@@ -38,7 +39,17 @@ git version
 git version 2.32.0
 ```
 
-設定
+## <a name="gitconfig"></a>Git 最初のGitの構成
+デフォルトブランチ名を ```main``` とする。
+```
+git config --global init.defaultBranch main
+```
+```
+git config --global init.defaultBranch main
+```
+```
+git config --global init.defaultBranch main
+```
 ```
 git config --global init.defaultBranch main
 ```
