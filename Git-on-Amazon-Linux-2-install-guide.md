@@ -206,8 +206,8 @@ AWS CodeCommit にログインし、リポジトリの変更が反映されて�
 + [README](README.md)
 ***
 >Linux や Mac などの行末に LF を使うシステムで作業をしている場合は、Git にチェックアウト時の自動変換をされてしまうと困ります。しかし、行末が CRLF なファイルが紛れ込んでしまった場合には Git に自動修正してもらいたいものです。 コミット時の CRLF から LF への変換はさせたいけれどもそれ以外の自動変換が不要な場合は、core.autocrlf を input に設定します。<br>
-<br>
-改行コードの問題<br>https://www.git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA-Git-%E3%81%AE%E8%A8%AD%E5%AE%9A#_core_autocrlf
+>改行コードの問題<br>
+https://www.git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA-Git-%E3%81%AE%E8%A8%AD%E5%AE%9A#_core_autocrlf
 
 >git initを実行した後、マスターブランチの名前を変更するのを忘れないでください。 このオプションはあなたを助けます！ <br>
 https://www.seancdavis.com/posts/git-set-default-branch/
