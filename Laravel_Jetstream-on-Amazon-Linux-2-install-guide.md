@@ -612,8 +612,8 @@ nodejs をインストール（バージョンを指定します）
 nvm install 17.8.0
 ```
 >最新版は依存関係に問題が出ます（2022/06/08)<br>
->node: /lib64/libm.so.6: version /`GLIBC_2.27' not found (required by node)<br>
->node: /lib64/libc.so.6: version /`GLIBC_2.28' not found (required by node)<br>
+>node: /lib64/libm.so.6: version \`GLIBC_2.27' not found (required by node)<br>
+>node: /lib64/libc.so.6: version \`GLIBC_2.28' not found (required by node)<br>
 >```
 >nvm install node
 >```
