@@ -607,10 +607,14 @@ nvm.sh を実行します
 . ~/.nvm/nvm.sh
 ```
 
-nodejs をインストール
+nodejs をインストール（バージョンを指定します）
 ```
-nvm install node
+nvm install 17.8.0
 ```
+>最新版は依存関係に問題が出ます（2022/06/08)
+>```
+>nvm install node
+>```
 
 応答
 ```
