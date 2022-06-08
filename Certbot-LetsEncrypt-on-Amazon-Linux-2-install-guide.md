@@ -13,6 +13,7 @@
 + [Certbot をインストールする](#certbot_install)
 + [Certbot を実行](#sudo_certbot)
 + [HTTPS TCP 443 のポートを開く](#443)
++ [証明書の自動更新を設定](#crontab)
 + [インストールの参考にした WebSite](#reference_website)
 ***
 ## <a name="nginx_conf_domain"></a>nginx.conf へ独自ドメインを設定する
@@ -174,6 +175,64 @@ sudo systemctl reload nginx
 
 アドレスバーの先頭に鍵のアイコンが表示され、安全な接続となっていれば設定は完了です。
 
+
+## <a name="crontab"></a>証明書の自動更新を設定
+Certbot をcron に設定して自動で証明書の更新を行う。
+
+
+```
+cd /etc/
+sudo nano crontab -e
+```
+
+応答
+```
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+```
+
+以下の一行を書き足す。
+```
+34 4,16 *  *  * root       certbot renew --no-self-upgrade
+```
+
+書き足した `crontab`
+```
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+34 4,16 *  *  * root       certbot renew --no-self-upgrade
+```
+保存して閉じる。
+
+`crond` を再起動します。
+```
+sudo systemctl restart crond
+```
+
 ***
 + [pageTop](#pageTop)
 + [README](README.md)
@@ -184,5 +243,6 @@ sudo systemctl reload nginx
 >https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-enable-epel/<br>
 >AWSEC2へのnginxとcertbotのインストール<br>
 >https://techread.me/installing-nginx-and-certbot-on-aws-ec2/<br>
->チュートリアル: Amazon Linux 2 に SSL/TLS を設定する<br>
->https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html
+>チュートリアル: Certificate Automation: Amazon Linux 2 での Let's Encrypt と Certbot の使用<br>
+>https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html#letsencrypt
+
