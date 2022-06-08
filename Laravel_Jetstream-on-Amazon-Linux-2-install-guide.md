@@ -607,10 +607,16 @@ nvm.sh を実行します
 . ~/.nvm/nvm.sh
 ```
 
-nodejs をインストール
+nodejs をインストール（バージョンを指定します）
 ```
-nvm install node
+nvm install 17.8.0
 ```
+>最新版は依存関係に問題が出ます（2022/06/08)<br>
+>node: /lib64/libm.so.6: version \`GLIBC_2.27' not found (required by node)<br>
+>node: /lib64/libc.so.6: version \`GLIBC_2.28' not found (required by node)<br>
+>```
+>nvm install node
+>```
 
 応答
 ```
@@ -749,10 +755,10 @@ resources/views/vendor/jetstream/components/application-mark.blade.php
 npm run dev
 ```
 
-**> ディレクトリ、 storage と bootstrap/cache のグループを、webサーバー のグループ apache に変更する**
+**> ディレクトリ、 storage と bootstrap/cache のユーザーを、webサーバー の apache に変更する**
 ```
 cd /srv/www/laravel-jetstream/
-sudo chown -R ec2-user:apache storage bootstrap/cache
+sudo chown -R apache:ec2-user storage bootstrap/cache
 ls -la
 ```
 

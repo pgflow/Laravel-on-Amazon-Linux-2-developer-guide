@@ -92,7 +92,7 @@ sudo systemctl start php-fpm
 
 NGINX を再起動してインストールした php-fpm を適用します。
 ```
-# sudo systemctl restart nginx
+sudo systemctl restart nginx
 ```
 
 php-fpm 状態
