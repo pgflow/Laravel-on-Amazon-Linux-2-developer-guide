@@ -12,6 +12,12 @@
 + Windows Terminal などで、SSH 接続出来る準備が出来ていること。
 
 
+>Amazon Linux 2 が 5 年間の長期サポート (LTS) を付随して、正式版を公開しました。2 つの LTS candidate ビルド版を 2017 年 12 月 13 日と 2018 年 4 月 9 日にリリース<br>
+>https://aws.amazon.com/jp/about-aws/whats-new/2018/06/announcing-amazon-linux-2-with-long-term-support/
+
+>Amazon Linux 2 の長期サポートは 2023 年 6 月 30 日まで、すべての主要なパッケージのセキュリティ更新とバグ修正を提供します。<br>
+>https://aws.amazon.com/jp/amazon-linux-2/faqs/
+
 ## 目次
 + [NGINX](NGINX-on-Amazon-Linux-2-install-guide.md)
 + [PHP](PHP-on-Amazon-Linux-2-install-guide.md)
