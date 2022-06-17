@@ -64,6 +64,7 @@
 + 📬**Email**
     + [Safe Email Testing With Mailtrap’s Fake SMTP Server（偽のSMTPサーバーを使用した安全な電子メールテスト）](https://mailtrap.io/fake-smtp-server/)
     + [ProtonMail（End-to-End Encryption 及び、独自ドメインメールの受信）](https://protonmail.com/jp/)
+    + [iCloud メールでカスタムメールドメインを使う](https://support.apple.com/ja-jp/HT212514)
 
 + 🖥️**Git**
     + **Git**
