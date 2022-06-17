@@ -967,11 +967,10 @@ ls -la
 drwxrwxr-x  5 ec2-user ec2-user     46 Mar 29 14:48 storage
 ```
 
-ディレクトリ、 storage と bootstrap/cache のユーザーを、webサーバー の apache に変更する
-※ bootstrap/cache も変更する理由は、```php artisan make:livewire``` などの command を実行した際に問題が出るため。
+ディレクトリ、 storage/ と bootstrap/cache/ のユーザーを、webサーバー の apache に変更する
+※ bootstrap/cache/ も変更する理由は、```php artisan make:livewire``` などの command を実行した際に問題が出るため。
 ```
-cd /srv/www/laravel/
-sudo chown -R apache:ec2-user storage bootstrap/cache
+sudo chown -R apache:ec2-user storage/ bootstrap/cache/
 ls -la
 ```
 

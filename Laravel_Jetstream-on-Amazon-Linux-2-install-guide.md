@@ -517,7 +517,7 @@ Livewire を使用するオプションでインストール
 php artisan jetstream:install livewire
 ```
 >**注意**<br>
->--teams オプションをつけて install しても、<br>
+>--teams オプションをつけて install しても化<br>
 >```
 >php artisan jetstream:install livewire --teams
 >```
@@ -755,12 +755,12 @@ resources/views/vendor/jetstream/components/application-mark.blade.php
 npm run dev
 ```
 
-**> ディレクトリ、 storage と bootstrap/cache のユーザーを、webサーバー の apache に変更する**
+**> ディレクトリ、 storage/ と bootstrap/cache/ のユーザーを、webサーバー の apache に変更する**
 ```
-cd /srv/www/laravel-jetstream/
-sudo chown -R apache:ec2-user storage bootstrap/cache
+sudo chown -R apache:ec2-user storage/ bootstrap/cache/
 ls -la
 ```
+
 
 **> インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel Jetstream が動いているのを確認する。**
 
