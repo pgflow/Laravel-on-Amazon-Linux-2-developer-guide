@@ -55,12 +55,11 @@ composer の設定 サンドボックスでは `--no-dev` オプションは使�
 ```
 composer install --optimize-autoloader
 ```
+
 ディレクトリ、 storage/ と bootstrap/cache/ のユーザーを、webサーバー の apache に変更する
 ```
 sudo chown -R apache:ec2-user storage/ bootstrap/cache/
 ```
-sudo chown -R apache:ec2-user storage/ bootstrap/cache/
-
 
 Application キー の作成
 ```
@@ -87,17 +86,15 @@ php artisan migrate
 以上
 
 
-
-
-
 .htpasswd を作成
 ```
 printf "user:$(openssl passwd -crypt password)\n" >> .htpasswd
 ```
 
+nginx.conf に追記する。
 ```
 auth_basic "Authentication required";
-auth_basic_user_file /srv/www/.htpasswd;
+auth_basic_user_file /srv/www/プロジェクトディレクトリ/.htpasswd;
 ```
 
 以下のエラーへの対処方法
@@ -108,12 +105,6 @@ file_put_contents(/srv/www/xxx/storage/framework/views/xxx.php): Failed to open 
 ```
 php artisan view:cache
 ```
-
-
-laravel file_put_contents Failed to open stream: Permission denied
-
-
-
 
 
 
