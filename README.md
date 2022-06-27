@@ -48,6 +48,7 @@
 
     + **Tips**
         + [スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?](https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/)
+        + [15.2.3. スワップファイルの削除](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/6/html/storage_administration_guide/swap-removing-file)
 
 + 📕**Laravel**
 
