@@ -65,8 +65,8 @@ sudo mkswap /swapfile
 
 応答
 ```
-Setting up swapspace version 1, size = 2 GiB (2147479552 bytes)
-no label, UUID=46129958-e718-4d78-b22a-4eab04f92ffb
+Setting up swapspace version 1, size = 4 GiB (4294963200 bytes)
+no label, UUID=619dfbd8-2451-41fa-b1f6-8f0ca2cfe8d5
 ```
 
 スワップ領域に swapfile を追加して、swapfile を即座に使用できるようにします。
