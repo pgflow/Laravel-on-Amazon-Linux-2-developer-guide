@@ -43,7 +43,7 @@ Swap:             0           0           0
 以下の dd コマンドで、swapfile 2 GB (128 MB x 16) を作成します。※契約インスタンスのメモリ（システムRAM）の2～4倍以内で調整するとよい。（実際に動かしているアプリケーションによります）<br>
 command からの返答に少し時間（30秒程度）が、かかります。
 ```
-sudo dd if=/dev/zero of=/swapfile bs=128M count=16
+sudo dd if=/dev/zero of=/swapfile bs=128M count=32
 ```
 
 応答
