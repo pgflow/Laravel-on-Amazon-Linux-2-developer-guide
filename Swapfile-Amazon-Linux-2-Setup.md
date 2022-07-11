@@ -48,9 +48,9 @@ sudo dd if=/dev/zero of=/swapfile bs=128M count=32
 
 応答
 ```
-16+0 records in
-16+0 records out
-2147483648 bytes (2.1 GB) copied, 31.6694 s, 67.8 MB/s
+32+0 records in
+32+0 records out
+4294967296 bytes (4.3 GB) copied, 64.8561 s, 66.2 MB/s
 ```
 
 swapfile の読み書きのアクセス許可を更新します。
