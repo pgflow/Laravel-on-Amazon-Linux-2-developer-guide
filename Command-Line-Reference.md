@@ -5,6 +5,7 @@
 + [Linux](#linux)
 + [Tailwind CSS](#tailwind_css)
 + [MariaDB](#mariadb)
++ [Git](#git)
 
 ***
 
@@ -74,3 +75,46 @@ revoke drop on データベース名.デーブル名 from 'ユーザー名';
 flush privileges;
 ```
 
+## <a name="git"></a>Git
+
+### 削除しても表示されるリモートブランチの消去
+
+origin （origin 以外の名前なら作成した名前）を確認する
+```
+git remote show origin
+```
+
+応答（例）
+```
+~
+  Remote branches:
+    feature stale
+    main    tracked
+~
+```
+
+ Remote branches: が `tracked` `（追跡）` であれば、branch は存在し利用中です。
+
+ Remote branches: が `stale` `（古い）` であれば、削除済み branch です。 この削除済み branch が VScode に表示されることがある。ため消去します。
+
+消去するには ```prune``` を実行。
+```
+git remote prune origin
+```
+消去される branch を事前に確認したい場合は ```dry-run``` 使用する。
+```
+git remote prune origin --dry-run
+```
+
+削除が行われたか、origin （origin 以外の名前なら作成した名前）を確認する
+```
+git remote show origin
+```
+
+応答（例）
+```
+~
+  Remote branches:
+    main    tracked
+~
+```
