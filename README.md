@@ -35,8 +35,8 @@
 ***
 + [Visual Studio Code](Visual_Studio_Code-on-Amazon-Linux-2-install-guide.md)
 + [Command Line Reference](Command-Line-Reference.md)
-+ [Swapfile の設定](Swapfile-Amazon-Linux-2-Setup.md)
-
++ [Swapfile](Swapfile-Amazon-Linux-2-Setup.md)
++ [NGINX AUTH BASIC（ベーシック認証）](NGINX-Auth-Basic.md)
 ***
 ## 🔖Bookmarks
 

@@ -13,6 +13,7 @@
 + [php-fpm サービスコマンドリスト](#status_php-fpm_service)
 + [PHP8.0 インストールの参考にした WebSite](#reference_website_php)
 
+***
 ## <a name="install_php"></a>PHP8.0 インストール
 
 インストールされている PHP のバージョンを確認する
