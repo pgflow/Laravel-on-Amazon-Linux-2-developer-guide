@@ -40,17 +40,17 @@ Swap:             0           0           0
 >スワップファイルを使用して、Amazon EC2 インスタンスのスワップ領域として機能するようにメモリを割り当てるにはどうすればよいですか?<br>
 >https://aws.amazon.com/jp/premiumsupport/knowledge-center/ec2-memory-swap-file/
 
-以下の dd コマンドで、swapfile 2 GB (128 MB x 16) を作成します。※契約インスタンスのメモリ（システムRAM）の2倍以内で調整するとよい。（実際に動かしているアプリケーションによります）<br>
+以下の dd コマンドで、swapfile 4 GB (128 MB x 32) を作成します。※契約インスタンスのメモリ（システムRAM）の4倍以内で調整するとよい。（実際に動かしているアプリケーションによります）<br>
 command からの返答に少し時間（30秒程度）が、かかります。
 ```
-sudo dd if=/dev/zero of=/swapfile bs=128M count=16
+sudo dd if=/dev/zero of=/swapfile bs=128M count=32
 ```
 
 応答
 ```
-16+0 records in
-16+0 records out
-2147483648 bytes (2.1 GB) copied, 31.6694 s, 67.8 MB/s
+32+0 records in
+32+0 records out
+4294967296 bytes (4.3 GB) copied, 64.8561 s, 66.2 MB/s
 ```
 
 swapfile の読み書きのアクセス許可を更新します。
@@ -61,6 +61,12 @@ sudo chmod 600 /swapfile
 swapfile 領域のセットアップ
 ```
 sudo mkswap /swapfile
+```
+
+応答
+```
+Setting up swapspace version 1, size = 4 GiB (4294963200 bytes)
+no label, UUID=619dfbd8-2451-41fa-b1f6-8f0ca2cfe8d5
 ```
 
 スワップ領域に swapfile を追加して、swapfile を即座に使用できるようにします。
