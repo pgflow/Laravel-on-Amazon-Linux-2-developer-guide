@@ -16,12 +16,10 @@
 
 ## <a name="install_httpd-tools"></a>httpd-tools をインストール
 
-
-
+httpd-tools をインストールして、.htpasswd ファイルを作成する。
 ```
 sudo yum install httpd-tools
 ```
-
 
 応答
 ```
@@ -131,7 +129,6 @@ yarn-error.log
 
 `control` + `x` で保存して終了します。
 
-
 .htpasswd ファイルを作成します。
 ```
 htpasswd -c .htpasswd your_user_name
@@ -154,7 +151,8 @@ cat .htpasswd
 your_user_name:$apr1$J8CsFlwf$2ZXOHw9l3k5V/DS.EyxcO1
 ```
 
-## <a name="nginxconf"></a>nginx.conf に設定を追加
+## <a name="nginxconf"></a>nginx.conf に設定を追加 nginx.conf
+
 nginx.conf に auth_basic と auth_basic_user_file を追加します。
 
 ```
