@@ -130,8 +130,17 @@ yarn-error.log
 `control` + `x` で保存して終了します。
 
 .htpasswd ファイルを作成します。
+`-c` オプションは最初に作成する際にパスワードを入力するためのオプションです。
+ユーザ名とパスワードを追加する場合は、`-c` オプションを指定しないでください。
+
+新規の場合
 ```
 htpasswd -c .htpasswd your_user_name
+```
+
+ユーザーを追加する場合
+```
+htpasswd .htpasswd your_user_name
 ```
 
 応答
