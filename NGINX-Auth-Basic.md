@@ -1,8 +1,5 @@
-# <a name="pageTop"></a> NGINX AUTH BASIC set up（ベーシック認証）
+# <a id="pageTop"></a> NGINX AUTH BASIC set up（ベーシック認証）
 
-
-
-+ [pageTop](#pageTop)
 
 作成日：2022/08/22
 
@@ -20,7 +17,7 @@
 
 ***
 
-## <a name="install_httpd-tools"></a>httpd-tools をインストール
+## <a id="install_httpd-tools"></a>httpd-tools をインストール
 
 httpd-tools をインストールして、.htpasswd ファイルを作成する。
 
@@ -106,7 +103,7 @@ Complete!
 
 ```
 
-## <a name="htpasswd"></a>.htpasswd ファイルを作成
+## <a id="htpasswd"></a>.htpasswd ファイルを作成
 Git で .htpasswd ファイルを管理されないようにする為、プロジェクトディレクトリへ移動し、.gitignore に .htpasswd を追記します。
 
 ```
@@ -188,7 +185,7 @@ cat .htpasswd
 your_user_name:$apr1$J8CsFlwf$2ZXOHw9l3k5V/DS.EyxcO1
 ```
 
-## <a name="nginxconf"></a>nginx.conf に設定を追加 nginx.conf
+## <a id="nginxconf"></a>nginx.conf に設定を追加 nginx.conf
 
 nginx.conf に auth_basic と auth_basic_user_file を追加します。
 
