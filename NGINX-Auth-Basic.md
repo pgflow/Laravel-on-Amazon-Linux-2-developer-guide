@@ -21,8 +21,16 @@
 
 httpd-tools をインストールして、.htpasswd ファイルを作成する。
 
+
 ```bash
 sudo yum install httpd-tools
+```
+
+あるいは、以下のコマンドでインストールする。
+
+```bash
+```bash
+yum install httpd-tools
 ```
 
 応答
@@ -230,4 +238,5 @@ sudo systemctl restart nginx
 
 ***
 
-> nginxでベーシック（Basic）認証を設定する方法 <https://www.server-memo.net/server-setting/nginx/basic_auth.html>
+> nginxでベーシック（Basic）認証を設定する方法  
+<https://www.server-memo.net/server-setting/nginx/basic_auth.html>
