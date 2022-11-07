@@ -4,7 +4,7 @@
 
 このドキュメントは、Amazon Linux 2 に Laravel 実行環境を構築する事を目的に書かれています。作成時より時が経つと書いている手順通りに出来なくなる可能性があります。
 
-## 前提..
+## 前提
 
 + [Amazon Lightsail](https://lightsail.aws.amazon.com/)
 で Amazon Linux 2 インスタンスを新規作成済みであること。<br>
