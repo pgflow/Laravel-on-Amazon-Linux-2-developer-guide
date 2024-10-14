@@ -82,7 +82,7 @@ sudo systemctl status nginx.service
 
 ブラウザに以下のページが表示されたらOK
 
-![Welcome to nginx on Amazon Linux!](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome-to-nginx-on-Amazon-Linux.png)
+![Welcome to nginx on Amazon Linux!](images/Welcome-to-nginx-on-Amazon-Linux.png)
 
 
 ## <a name="enabled_nginx_service"></a>NGINX プロセスの自動起動設定
