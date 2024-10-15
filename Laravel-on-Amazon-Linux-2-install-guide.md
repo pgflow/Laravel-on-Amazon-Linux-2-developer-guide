@@ -924,7 +924,7 @@ Laravel へブラウザでアクセス出来るか確認する
 
 ブラウザに以下の以下のエラーが表示されます
 
-![laravel_storage_permission](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/laravel_storage_permission.png)
+![laravel_storage_permission](images/laravel_storage_permission.png)
 
 エラー抜粋<br>
 Laravel storage ディレクトリの権限変更 が必要、次の手順で変更します。
