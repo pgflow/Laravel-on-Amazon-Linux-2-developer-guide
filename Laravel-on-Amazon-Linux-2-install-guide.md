@@ -569,7 +569,7 @@ get nginx.conf C:\Users\username\Downloads
 
 上記コマンドを Enter すると<br>
 自分のPCのダウンロードフォルダに nginx.conf が保存されました。
-![nginx.conf](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/nginx_conf_download.png)
+![nginx.conf](images/nginx_conf_download.png)
 
 ## <a name="edit_nginxconf"></a>nginx.conf を編集 Laravel server の設定を書き足す
 
