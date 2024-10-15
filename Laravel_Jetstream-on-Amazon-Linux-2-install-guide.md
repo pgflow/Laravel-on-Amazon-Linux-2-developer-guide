@@ -766,7 +766,7 @@ ls -la
 
 右上の"Register"からユーザー登録すると、dashboard ページへ移動します。
 
-![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Welcome_to_your_Jetstream_application.png)
+![Laravel](images/Welcome_to_your_Jetstream_application.png)
 
 ## <a name="dashboard_error_mbstring"></a>dashboard へ移動できない MbstringPHP 拡張機能のインストール
 
