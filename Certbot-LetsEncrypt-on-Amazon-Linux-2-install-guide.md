@@ -166,12 +166,12 @@ sudo systemctl reload nginx
 ## <a name="443"></a>HTTPS TCP 443 のポートを開く
 インスタンス の ファイヤーウォール に HTTPS TCP 443 のポートを開くためのルールを追加します。
 
-![インスタンス の ファイヤーウォール に HTTPS TCP 443 のポートを開くためのルールを追加します。](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/IPv4-HTTPS-TCP-443.png)
+![インスタンス の ファイヤーウォール に HTTPS TCP 443 のポートを開くためのルールを追加します。](images/IPv4-HTTPS-TCP-443.png)
 
 
 設定した独自ドメインへブラウザでアクセスする。
 
-![アドレスバーの先頭に鍵のアイコンが表示され、安全な接続となっていれば設定は完了です。](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/HTTPS-icon.png)
+![アドレスバーの先頭に鍵のアイコンが表示され、安全な接続となっていれば設定は完了です。](images/HTTPS-icon.png)
 
 アドレスバーの先頭に鍵のアイコンが表示され、安全な接続となっていれば設定は完了です。
 
