@@ -982,7 +982,7 @@ drwxrwxr-x  5 ec2-user   apache       46 Mar 29 14:48 storage
 
 もう一度 インスタンスのパブリックIPアドレスへブラウザでアクセスし Laravel が動いているのを確認する。
 
-![Laravel](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/Laravel_beginning.png)
+![Laravel](images/Laravel_beginning.png)
 
 
 ***
