@@ -123,7 +123,7 @@ sudo mv testphp.php /usr/share/nginx/html/testphp.php
 
 ブラウザに以下のページが表示されたらOK
 
-![phpversion:8.0.16](https://pgflow.s3.us-west-2.amazonaws.com/github/Laravel-on-Amazon-Linux-2-developer-guide/phptest.png)
+![phpversion:8.0.16](images/phptest.png)
 
 作成した、testphp.php を削除します。
 ```
